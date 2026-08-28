@@ -5,15 +5,9 @@ import androidx.compose.runtime.Composable
 interface Lifecycle :
     Creatable,
     Preparable,
+    Loadable,
     Startable,
     Stoppable,
     Destroyable {
     @Composable fun startContent()
-
-    fun run(block: Lifecycle.() -> Unit) {
-        onCreate()
-        onPrepare()
-        block()
-        onStart()
-    }
 }

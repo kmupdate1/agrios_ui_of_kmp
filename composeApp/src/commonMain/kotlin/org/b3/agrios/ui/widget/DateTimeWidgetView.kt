@@ -16,6 +16,9 @@ class DateTimeWidgetView(
     private val format: DateTimeFormat<LocalDateTime>,
 ) : View {
     @Composable
+    override fun onReCompose() { }
+
+    @Composable
     override fun onRender() {
         Text(
             text = instant

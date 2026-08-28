@@ -4,19 +4,19 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import org.b3.agrios.lifecycle.Lifecycle
 import org.b3.agrios.ui.AgriOsConsoleRootComposition
-import org.b3.agrios.ui.capability.Renderable
+import org.b3.agrios.ui.capability.Drawable
 import org.b3.agrios.ui.impl.console.AgriOsConsoleThemeContainerView
 import org.b3.agrios.ui.lifecycle.UiLifecycle
 import org.b3.agrios.ui.view.View
 
 object Application : Lifecycle {
     override fun onCreate() {
-        renderable = uiLifecycle.onCreate()
+        drawable = uiLifecycle.onCreate()
     }
 
-    override fun onPrepare() {
-        uiLifecycle.onPrepare()
-    }
+    override fun onPrepare() { }
+
+    override fun onLoad() { }
 
     override fun onStart() { }
 
@@ -30,28 +30,38 @@ object Application : Lifecycle {
 
     @Composable
     override fun startContent() {
-        uiLifecycle.onStart(renderable)
+        onLoad()
+
+        uiLifecycle.onPrepare(drawable)
+        uiLifecycle.onStart()
+
+        onStart()
     }
 
-    private lateinit var renderable: Renderable
+    private lateinit var drawable: Drawable
     private val uiLifecycle: UiLifecycle = object : UiLifecycle {
-        override fun onCreate(): Renderable =
+        override fun onCreate(): Drawable =
             AgriOsConsoleRootComposition.compose()
 
-        override fun onPrepare() { }
-
         @Composable
-        override fun onStart(renderable: Renderable) {
-            val view: View = AgriOsConsoleThemeContainerView(
+        override fun onPrepare(drawable: Drawable) {
+            view = AgriOsConsoleThemeContainerView(
                 isDarkTheme = isSystemInDarkTheme(),
-                renderable = renderable,
+                drawable = drawable,
             )
 
+            view.onReCompose()
+        }
+
+        @Composable
+        override fun onStart() {
             view.onRender()
         }
 
         override fun onStop() { }
 
         override fun onDestroy() { }
+
+        private lateinit var view: View
     }
 }

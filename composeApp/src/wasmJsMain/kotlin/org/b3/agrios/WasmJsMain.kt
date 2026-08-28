@@ -7,6 +7,9 @@ import org.b3.agrios.lifecycle.Lifecycle
 object WasmJsMain : Bootable {
     @OptIn(ExperimentalComposeUiApi::class)
     override fun bootstrap() = application.run {
+        onCreate()
+        onPrepare()
+
         ComposeViewport(
             viewportContainerId = VIEWPORT_CONTAINER_ID,
             content = ::startContent,

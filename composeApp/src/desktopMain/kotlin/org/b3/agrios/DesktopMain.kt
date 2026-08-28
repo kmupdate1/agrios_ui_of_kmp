@@ -6,6 +6,9 @@ import org.b3.agrios.lifecycle.Lifecycle
 
 object DesktopMain : Bootable {
     override fun bootstrap() = application.run {
+        onCreate()
+        onPrepare()
+
         application {
             Window(
                 onCloseRequest = ::exitApplication,

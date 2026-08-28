@@ -7,6 +7,9 @@ abstract class OverlayContainerView(
     protected val children: List<View>,
 ) : InteractiveContainerView {
     @Composable
+    override fun onReCompose() { }
+
+    @Composable
     override fun onRender() {
         children.forEach { child -> child.onRender() }
     }

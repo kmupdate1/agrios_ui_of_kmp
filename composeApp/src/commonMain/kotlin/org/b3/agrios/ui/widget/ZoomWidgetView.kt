@@ -12,6 +12,9 @@ class ZoomWidgetView(
     private val onReset: () -> Unit,
 ) : View {
     @Composable
+    override fun onReCompose() { }
+
+    @Composable
     override fun onRender() {
         Column {
             Button(onClick = onZoomIn) { Text("+") }

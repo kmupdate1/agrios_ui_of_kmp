@@ -10,6 +10,9 @@ class PullDownWidgetView<T>(
     private val label: (T) -> String,
     private val onSelect: (T) -> Unit,
 ) : View {
+    @Composable
+    override fun onReCompose() { }
+
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     override fun onRender() {
@@ -41,7 +44,7 @@ class PullDownWidgetView<T>(
                     DropdownMenuItem(
                         text = { Text(text = label(item)) },
                         onClick = {
-                            expanded = false; selected = item;
+                            expanded = false; selected = item
                             onSelect(item)
                         },
                     )

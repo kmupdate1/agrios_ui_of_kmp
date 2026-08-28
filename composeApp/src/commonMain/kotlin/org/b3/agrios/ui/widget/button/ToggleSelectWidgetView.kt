@@ -1,4 +1,4 @@
-package org.b3.agrios.ui.widget
+package org.b3.agrios.ui.widget.button
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.FilterChip
@@ -12,6 +12,9 @@ class ToggleSelectWidgetView<T>(
     private val label: (T) -> String = { it.toString() },
     private val onSelected: (T) -> Unit
 ) : View {
+    @Composable
+    override fun onReCompose() { }
+
     @Composable
     override fun onRender() {
         Row {

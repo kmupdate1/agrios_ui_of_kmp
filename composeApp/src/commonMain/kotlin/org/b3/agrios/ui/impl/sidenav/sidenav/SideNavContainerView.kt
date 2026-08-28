@@ -19,14 +19,21 @@ class SideNavContainerView(
     modifier: Modifier = Modifier,
 ) : Reorderable, VerticalListContainerView(
     children = listOf(title, itemGroup, column),
-    modifier = modifier
-        .padding(horizontal = 8.dp, vertical = 16.dp),
+    modifier = modifier,
 ) {
     override fun onReorder() {  }
 
+    @Deprecated("", level = DeprecationLevel.WARNING)
+    @Composable
+    override fun onReCompose() {
+        super.onReCompose()
+    }
+
     @Composable
     override fun onRender() {
-        super.modifier.background(MaterialTheme.colorScheme.background)
+        renderingModifier = modifier
+            .background(MaterialTheme.colorScheme.surface)
+            .padding(horizontal = 8.dp, vertical = 16.dp)
         super.onRender()
     }
 }

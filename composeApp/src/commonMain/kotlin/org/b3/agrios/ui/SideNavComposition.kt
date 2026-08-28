@@ -1,10 +1,18 @@
 package org.b3.agrios.ui
 
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.EnergySavingsLeaf
+import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import org.b3.agrios.ui.content.ContentView
 import org.b3.agrios.ui.content.ContentViewContext
 import org.b3.agrios.ui.content.ContentViewShell
@@ -12,15 +20,31 @@ import org.b3.agrios.ui.impl.sidenav.column.ColumnContainerView
 import org.b3.agrios.ui.impl.sidenav.column.ColumnContentGroupContainerView
 import org.b3.agrios.ui.impl.sidenav.item.ItemContainerView
 import org.b3.agrios.ui.impl.sidenav.item.ItemGroupContainerView
-import org.b3.agrios.ui.widget.ExecuteButtonWidgetView
+import org.b3.agrios.ui.widget.button.ButtonVariant
+import org.b3.agrios.ui.widget.button.ExecuteButtonWidgetView
 
 object SideNavComposition {
     fun composeTitle(): ContentView = object : ContentViewShell() {
         override val context: ContentViewContext =
             ContentViewContext("sidenav_title", "SideNav Title")
+
+        @Composable
+        override fun onReCompose() { }
+
         @Composable
         override fun onRender() = super.create {
-            Text("AgriOS")
+            Row {
+                Icon(
+                    Icons.Default.EnergySavingsLeaf,
+                    contentDescription = "",
+                    tint = MaterialTheme.colorScheme.primary,
+                )
+                Spacer(Modifier.width(8.dp))
+                Text(
+                    text = "Agri ONE",
+                    color = MaterialTheme.colorScheme.onPrimaryContainer,
+                )
+            }
         }
     }
     fun composeItemGroup(): ItemGroupContainerView = ItemGroupContainerView(
@@ -29,14 +53,22 @@ object SideNavComposition {
                 icon = object : ContentViewShell() {
                     override val context: ContentViewContext =
                         ContentViewContext("sidenav_item_group", "Item Group")
+
+                    @Composable
+                    override fun onReCompose() { }
+
                     @Composable
                     override fun onRender() = super.create {
-                        Icon(imageVector = Icons.Default.Settings, contentDescription = null)
+                        Icon(imageVector = Icons.Outlined.Settings, contentDescription = null)
                     }
                 },
                 title = object : ContentViewShell() {
                     override val context: ContentViewContext =
                         ContentViewContext("sidenav_item_title", "Item Title")
+
+                    @Composable
+                    override fun onReCompose() { }
+
                     @Composable
                     override fun onRender() = super.create {
                         Text("|Settings")
@@ -45,9 +77,12 @@ object SideNavComposition {
                 notification = object : ContentViewShell() {
                     override val context: ContentViewContext =
                         ContentViewContext("", "")
+
+                    @Composable
+                    override fun onReCompose() { }
+
                     @Composable
                     override fun onRender() = super.create {
-                        Text("|Notifications: 3")
                     }
                 }
             ),
@@ -65,8 +100,10 @@ object SideNavComposition {
                 ContentViewContext("column_title", "Column Title")
 
             @Composable
+            override fun onReCompose() { }
+
+            @Composable
             override fun onRender() = super.create {
-                println("system status")
                 Text("System Status")
             }
         },
@@ -76,8 +113,10 @@ object SideNavComposition {
                     ContentViewContext("column_content_group", "Column ContentGroup")
 
                 @Composable
+                override fun onReCompose() { }
+
+                @Composable
                 override fun onRender() = super.create {
-                    println("gateway")
                     Text("Gateway")
                 }
             },
@@ -86,8 +125,10 @@ object SideNavComposition {
                     ContentViewContext("column_status", "Column Status")
 
                 @Composable
+                override fun onReCompose() { }
+
+                @Composable
                 override fun onRender() = super.create {
-                    println("status")
                     Text("|🟢")
                 }
             },
@@ -96,12 +137,28 @@ object SideNavComposition {
                     ContentViewContext("column_description", "Column Description")
 
                 @Composable
+                override fun onReCompose() { }
+
+                @Composable
                 override fun onRender() = super.create {
-                    println("description")
                     Text("|Online")
                 }
             },
         ),
-        button = ExecuteButtonWidgetView(),
+        button = object : ExecuteButtonWidgetView(modifier = Modifier.fillMaxWidth()) {
+            override val context: ContentViewContext =
+                ContentViewContext("", "")
+
+            override val variant: ButtonVariant = ButtonVariant.Outlined
+
+            override fun execute() {
+                println("Column 'Show Details' Button clicked.")
+            }
+
+            @Composable
+            override fun onContent() {
+                Text("Show Details")
+            }
+        },
     )
 }

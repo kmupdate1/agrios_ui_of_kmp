@@ -13,6 +13,11 @@ abstract class HorizontalListContainerView(
     modifier = modifier,
 ) {
     @Composable
+    override fun onReCompose() {
+        super.onReCompose()
+    }
+
+    @Composable
     override fun onRender() =
         Row(modifier = super.modifier) { super.onRender() }
 }

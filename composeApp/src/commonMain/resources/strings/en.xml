@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <type name="button">
+        <string name="show_details">Show Details</string>
+        <string name="execute">Execute</string>
+        <string name="cancel">Cancel</string>
+
+        <string name="toggle_enabled">Enabled</string>
+        <string name="toggle_disabled">Disabled</string>
+    </type>
+</resources>
