@@ -32,7 +32,7 @@ object SideNavComposition {
         override fun onReCompose() { }
 
         @Composable
-        override fun onRender() = super.create {
+        override fun onRender() = super.create(modifier = Modifier, content = {
             Row {
                 Icon(
                     Icons.Default.EnergySavingsLeaf,
@@ -45,7 +45,7 @@ object SideNavComposition {
                     color = MaterialTheme.colorScheme.onPrimaryContainer,
                 )
             }
-        }
+        })
     }
     fun composeItemGroup(): ItemGroupContainerView = ItemGroupContainerView(
         items = listOf(
@@ -58,9 +58,9 @@ object SideNavComposition {
                     override fun onReCompose() { }
 
                     @Composable
-                    override fun onRender() = super.create {
+                    override fun onRender() = super.create(modifier = Modifier, content = {
                         Icon(imageVector = Icons.Outlined.Settings, contentDescription = null)
-                    }
+                    })
                 },
                 title = object : ContentViewShell() {
                     override val context: ContentViewContext =
@@ -70,9 +70,9 @@ object SideNavComposition {
                     override fun onReCompose() { }
 
                     @Composable
-                    override fun onRender() = super.create {
+                    override fun onRender() = super.create(modifier = Modifier, content = {
                         Text("|Settings")
-                    }
+                    })
                 },
                 notification = object : ContentViewShell() {
                     override val context: ContentViewContext =
@@ -82,8 +82,7 @@ object SideNavComposition {
                     override fun onReCompose() { }
 
                     @Composable
-                    override fun onRender() = super.create {
-                    }
+                    override fun onRender() = super.create(modifier = Modifier, content = {})
                 }
             ),
             /*
@@ -103,9 +102,9 @@ object SideNavComposition {
             override fun onReCompose() { }
 
             @Composable
-            override fun onRender() = super.create {
+            override fun onRender() = super.create(modifier = Modifier, content = {
                 Text("System Status")
-            }
+            })
         },
         contentGroup = ColumnContentGroupContainerView(
             content = object : ContentViewShell() {
@@ -116,9 +115,9 @@ object SideNavComposition {
                 override fun onReCompose() { }
 
                 @Composable
-                override fun onRender() = super.create {
+                override fun onRender() = super.create(modifier = Modifier, content = {
                     Text("Gateway")
-                }
+                })
             },
             status = object : ContentViewShell() {
                 override val context: ContentViewContext =
@@ -128,9 +127,9 @@ object SideNavComposition {
                 override fun onReCompose() { }
 
                 @Composable
-                override fun onRender() = super.create {
+                override fun onRender() = super.create(modifier = Modifier, content = {
                     Text("|🟢")
-                }
+                })
             },
             description = object : ContentViewShell() {
                 override val context: ContentViewContext =
@@ -140,9 +139,9 @@ object SideNavComposition {
                 override fun onReCompose() { }
 
                 @Composable
-                override fun onRender() = super.create {
+                override fun onRender() = super.create(modifier = Modifier, content = {
                     Text("|Online")
-                }
+                })
             },
         ),
         button = object : ExecuteButtonWidgetView(modifier = Modifier.fillMaxWidth()) {
