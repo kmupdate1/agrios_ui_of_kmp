@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm")
+    kotlin("plugin.serialization")
 }
 
 kotlin {
@@ -7,6 +8,7 @@ kotlin {
 }
 
 dependencies {
+    implementation(libs.kotlinx.serialization.xml)
     testImplementation(kotlin("test"))
 }
 
