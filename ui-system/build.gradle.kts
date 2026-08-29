@@ -9,8 +9,6 @@ plugins {
 }
 
 kotlin {
-    jvm("desktop")
-
     wasmJs {
         browser()
         binaries.executable()
@@ -43,24 +41,8 @@ kotlin {
             implementation(kotlin("test"))
         }
 
-        val desktopMain by getting
-        desktopMain.dependencies {
-            implementation(compose.desktop.currentOs)
-        }
-
         wasmJsMain.dependencies {
             implementation(libs.kotlinx.browswer)
-        }
-    }
-}
-
-compose.desktop {
-    application {
-        mainClass = "org.b3.agrios.ui.MainKt"
-
-        nativeDistributions {
-            packageName = "agrios_ui"
-            packageVersion = "0.1.0"
         }
     }
 }

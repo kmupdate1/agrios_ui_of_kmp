@@ -14,4 +14,8 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "agrios_ui"
-include(":composeApp")
+include(
+	":application",
+	":ui-system",
+	":http-client",
+)
