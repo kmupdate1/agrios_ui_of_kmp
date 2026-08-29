@@ -59,9 +59,6 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -73,120 +70,169 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import org.b3.agrios.data.DummyData
 import org.b3.agrios.model.AlertItem
+import org.b3.agrios.model.DashboardSnapshot
 import org.b3.agrios.model.MoistureStatus
 import org.b3.agrios.model.Severity
 import org.b3.agrios.model.WeatherDay
+import org.b3.agrios.model.WorkLog
 import org.b3.agrios.model.Zone
+import org.b3.agrios.ui.dashboard.DashboardController
+import org.b3.agrios.ui.dashboard.DashboardEvent
+import org.b3.agrios.ui.dashboard.DashboardNavigationItem
+import org.b3.agrios.ui.dashboard.IrrigationStatus
 
-@androidx.compose.runtime.Composable
-fun DashboardScreen(modifier: Modifier = Modifier) {
-    var selectedZone by remember { mutableStateOf(DummyData.zones[3]) }
-    var selectedNav by remember { mutableStateOf(0) }
-    var darkMode by remember { mutableStateOf(false) }
-    var recommendationState by remember { mutableStateOf("pending") }
-    var acknowledgedAlerts by remember { mutableStateOf(setOf<String>()) }
-    val palette = if (darkMode) DashboardPalette.dark else DashboardPalette.light
+@Composable
+fun DashboardScreen(
+    controller: DashboardController,
+    modifier: Modifier = Modifier,
+) {
+    val state by controller.state
+    val snapshot = state.snapshot
+    val palette = if (state.isDarkMode) DashboardPalette.dark else DashboardPalette.light
 
     Row(modifier.fillMaxSize().background(palette.background)) {
         DashboardSidebar(
             palette = palette,
-            selectedItem = selectedNav,
-            onItemSelected = { selectedNav = it },
+            selectedItem = state.selectedNavigation,
+            onItemSelected = { controller.onEvent(DashboardEvent.SelectNavigation(it)) },
         )
 
         Column(Modifier.fillMaxSize()) {
             DashboardHeader(
                 palette = palette,
-                darkMode = darkMode,
-                onToggleTheme = { darkMode = !darkMode },
+                farmName = snapshot.farmName,
+                lastSyncedAt = snapshot.lastSyncedAt,
+                isDarkMode = state.isDarkMode,
+                onToggleTheme = { controller.onEvent(DashboardEvent.ToggleTheme) },
             )
 
-            Column(
-                Modifier
-                    .fillMaxSize()
-                    .horizontalScroll(rememberScrollState())
-                    .padding(horizontal = 24.dp, vertical = 18.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp),
-            ) {
-                DashboardTitle(palette)
-
-                Row(
-                    Modifier.fillMaxWidth().height(350.dp),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp),
-                ) {
-                    FarmOverviewCard(
-                        palette = palette,
-                        selectedZone = selectedZone,
-                        onZoneSelected = { selectedZone = it },
-                        modifier = Modifier.weight(1.65f),
-                    )
-                    IrrigationCard(
-                        palette = palette,
-                        zone = selectedZone,
-                        state = recommendationState,
-                        onExecute = { recommendationState = "running" },
-                        onDefer = { recommendationState = "deferred" },
-                        modifier = Modifier.weight(0.85f),
-                    )
-                }
-
-                Row(
-                    Modifier.fillMaxWidth().height(270.dp),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp),
-                ) {
-                    ZoneStatusCard(
-                        palette = palette,
-                        selectedZone = selectedZone,
-                        onZoneSelected = { selectedZone = it },
-                        modifier = Modifier.weight(1.1f),
-                    )
-                    AlertStatusCard(
-                        palette = palette,
-                        acknowledgedAlerts = acknowledgedAlerts,
-                        onAcknowledge = { title ->
-                            acknowledgedAlerts = acknowledgedAlerts + title
-                        },
-                        modifier = Modifier.weight(0.9f),
-                    )
-                }
-
-                Row(
-                    Modifier.fillMaxWidth().height(250.dp),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp),
-                ) {
-                    MoistureTrendCard(
-                        palette = palette,
-                        selectedZone = selectedZone,
-                        modifier = Modifier.weight(1.1f),
-                    )
-                    WeatherCard(palette, modifier = Modifier.weight(0.9f))
-                }
-
-                WorkLogCard(palette)
-            }
+            DashboardBody(
+                palette = palette,
+                snapshot = snapshot,
+                selectedZone = state.selectedZone,
+                irrigationStatus = state.selectedIrrigationStatus,
+                runningIrrigationZoneId = state.runningIrrigationZoneId,
+                acknowledgedAlertIds = state.acknowledgedAlertIds,
+                onEvent = controller::onEvent,
+            )
         }
     }
 }
 
-@androidx.compose.runtime.Composable
+@Composable
+private fun DashboardBody(
+    palette: DashboardPalette,
+    snapshot: DashboardSnapshot,
+    selectedZone: Zone?,
+    irrigationStatus: IrrigationStatus,
+    runningIrrigationZoneId: String?,
+    acknowledgedAlertIds: Set<String>,
+    onEvent: (DashboardEvent) -> Unit,
+) {
+    Column(
+        Modifier
+            .fillMaxSize()
+            .horizontalScroll(rememberScrollState())
+            .padding(horizontal = 24.dp, vertical = 18.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+    ) {
+        DashboardTitle(palette)
+        if (selectedZone == null) {
+            EmptyDashboardState(palette, "表示できるゾーンデータがありません")
+        } else {
+            Row(
+                Modifier.fillMaxWidth().height(350.dp),
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+            ) {
+                FarmOverviewCard(
+                    palette = palette,
+                    farmName = snapshot.farmName,
+                    areaHectares = snapshot.areaHectares,
+                    location = snapshot.location,
+                    zones = snapshot.zones,
+                    selectedZone = selectedZone,
+                    onZoneSelected = { onEvent(DashboardEvent.SelectZone(it.id)) },
+                    modifier = Modifier.weight(1.65f),
+                )
+                IrrigationCard(
+                    palette = palette,
+                    zone = selectedZone,
+                    state = irrigationStatus,
+                    runningIrrigationZoneId = runningIrrigationZoneId,
+                    onExecute = { onEvent(DashboardEvent.ExecuteIrrigation) },
+                    onDefer = { onEvent(DashboardEvent.DeferIrrigation) },
+                    modifier = Modifier.weight(0.85f),
+                )
+            }
+
+            Row(
+                Modifier.fillMaxWidth().height(270.dp),
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+            ) {
+                ZoneStatusCard(
+                    palette = palette,
+                    zones = snapshot.zones,
+                    selectedZone = selectedZone,
+                    onZoneSelected = { onEvent(DashboardEvent.SelectZone(it.id)) },
+                    modifier = Modifier.weight(1.1f),
+                )
+                AlertStatusCard(
+                    palette = palette,
+                    alerts = snapshot.alerts,
+                    acknowledgedAlertIds = acknowledgedAlertIds,
+                    onAcknowledge = { onEvent(DashboardEvent.AcknowledgeAlert(it)) },
+                    modifier = Modifier.weight(0.9f),
+                )
+            }
+
+            Row(
+                Modifier.fillMaxWidth().height(250.dp),
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+            ) {
+                MoistureTrendCard(
+                    palette = palette,
+                    selectedZone = selectedZone,
+                    moistureHistory = snapshot.moistureHistory,
+                    modifier = Modifier.weight(1.1f),
+                )
+                WeatherCard(snapshot.weather, palette, modifier = Modifier.weight(0.9f))
+            }
+
+            WorkLogCard(snapshot.workLogs, palette)
+        }
+    }
+}
+
+@Composable
+private fun EmptyDashboardState(palette: DashboardPalette, message: String) {
+    Card(
+        Modifier.fillMaxWidth().height(180.dp),
+        colors = CardDefaults.cardColors(containerColor = palette.surface),
+    ) {
+        Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+            Text(message, color = palette.muted, fontSize = 13.sp)
+        }
+    }
+}
+
+@Composable
 private fun DashboardSidebar(
     palette: DashboardPalette,
-    selectedItem: Int,
-    onItemSelected: (Int) -> Unit,
+    selectedItem: DashboardNavigationItem,
+    onItemSelected: (DashboardNavigationItem) -> Unit,
 ) {
     val items = listOf(
-        Icons.Default.Analytics to "ダッシュボード",
-        Icons.Default.Map to "圃場マップ",
-        Icons.Default.Tune to "エリア・ゾーン",
-        Icons.Default.Sensors to "センサー",
-        Icons.Default.WaterDrop to "灌水管理",
-        Icons.Default.Memory to "機器制御",
-        Icons.Default.Notifications to "アラート",
-        Icons.Default.Assessment to "AIレポート",
-        Icons.Default.ShowChart to "履歴・グラフ",
-        Icons.Default.Settings to "設定",
+        DashboardNavigationItem.DASHBOARD to (Icons.Default.Analytics to "ダッシュボード"),
+        DashboardNavigationItem.FARM_MAP to (Icons.Default.Map to "圃場マップ"),
+        DashboardNavigationItem.ZONES to (Icons.Default.Tune to "エリア・ゾーン"),
+        DashboardNavigationItem.SENSORS to (Icons.Default.Sensors to "センサー"),
+        DashboardNavigationItem.IRRIGATION to (Icons.Default.WaterDrop to "灌水管理"),
+        DashboardNavigationItem.EQUIPMENT to (Icons.Default.Memory to "機器制御"),
+        DashboardNavigationItem.ALERTS to (Icons.Default.Notifications to "アラート"),
+        DashboardNavigationItem.AI_REPORTS to (Icons.Default.Assessment to "AIレポート"),
+        DashboardNavigationItem.HISTORY to (Icons.Default.ShowChart to "履歴・グラフ"),
+        DashboardNavigationItem.SETTINGS to (Icons.Default.Settings to "設定"),
     )
 
     Column(
@@ -215,21 +261,22 @@ private fun DashboardSidebar(
 
         Text("OPERATIONS", color = palette.sidebarMuted, fontSize = 10.sp, letterSpacing = 1.3.sp,
             modifier = Modifier.padding(start = 12.dp, top = 28.dp, bottom = 8.dp))
-        items.forEachIndexed { index, (icon, label) ->
+        items.forEach { (item, iconAndLabel) ->
+            val (icon, label) = iconAndLabel
             Row(
                 Modifier
                     .fillMaxWidth()
-                    .background(if (index == selectedItem) palette.sidebarSelected else Color.Transparent,
+                    .background(if (item == selectedItem) palette.sidebarSelected else Color.Transparent,
                         MaterialTheme.shapes.small)
-                    .clickable { onItemSelected(index) }
+                    .clickable { onItemSelected(item) }
                     .padding(horizontal = 12.dp, vertical = 11.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                Icon(icon, null, tint = if (index == selectedItem) palette.accent else palette.sidebarMuted,
+                Icon(icon, null, tint = if (item == selectedItem) palette.accent else palette.sidebarMuted,
                     modifier = Modifier.size(19.dp))
                 Spacer(Modifier.width(10.dp))
-                Text(label, color = if (index == selectedItem) Color.White else palette.sidebarText,
-                    fontSize = 13.sp, fontWeight = if (index == selectedItem) FontWeight.SemiBold else FontWeight.Normal)
+                Text(label, color = if (item == selectedItem) Color.White else palette.sidebarText,
+                    fontSize = 13.sp, fontWeight = if (item == selectedItem) FontWeight.SemiBold else FontWeight.Normal)
             }
         }
 
@@ -259,21 +306,27 @@ private fun StatusLine(label: String, value: String, valueColor: Color, palette:
 }
 
 @Composable
-private fun DashboardHeader(palette: DashboardPalette, darkMode: Boolean, onToggleTheme: () -> Unit) {
+private fun DashboardHeader(
+    palette: DashboardPalette,
+    farmName: String,
+    lastSyncedAt: String,
+    isDarkMode: Boolean,
+    onToggleTheme: () -> Unit,
+) {
     Row(
         Modifier.fillMaxWidth().background(palette.surface).padding(horizontal = 24.dp, vertical = 14.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Column(Modifier.weight(1f)) {
-            Text("養老圃場", color = palette.text, fontSize = 14.sp, fontWeight = FontWeight.Bold)
-            Text("最終同期 2025/05/24 14:30", color = palette.muted, fontSize = 10.sp)
+            Text(farmName, color = palette.text, fontSize = 14.sp, fontWeight = FontWeight.Bold)
+            Text("最終同期 $lastSyncedAt", color = palette.muted, fontSize = 10.sp)
         }
         Metric(Icons.Default.Thermostat, "26.3°C", "気温", palette)
         Metric(Icons.Default.Opacity, "58%", "湿度", palette)
         Metric(Icons.Default.WbSunny, "652 W/m²", "日射", palette)
         Spacer(Modifier.width(14.dp))
         IconButton(onClick = onToggleTheme) {
-            Icon(if (darkMode) Icons.Default.LightMode else Icons.Default.DarkMode,
+            Icon(if (isDarkMode) Icons.Default.LightMode else Icons.Default.DarkMode,
                 contentDescription = "テーマ切替", tint = palette.muted)
         }
         Box(Modifier.size(34.dp).background(palette.accent, MaterialTheme.shapes.small),
@@ -315,6 +368,10 @@ private fun DashboardTitle(palette: DashboardPalette) {
 @Composable
 private fun FarmOverviewCard(
     palette: DashboardPalette,
+    farmName: String,
+    areaHectares: Double,
+    location: String,
+    zones: List<Zone>,
     selectedZone: Zone,
     onZoneSelected: (Zone) -> Unit,
     modifier: Modifier = Modifier,
@@ -326,17 +383,17 @@ private fun FarmOverviewCard(
                 verticalAlignment = Alignment.CenterVertically) {
                 Column(Modifier.weight(1f)) {
                     Text("圃場マップ", color = palette.text, fontWeight = FontWeight.Bold, fontSize = 14.sp)
-                    Text("養老圃場 • 12.4 ha", color = palette.muted, fontSize = 10.sp)
+                    Text("$farmName • $areaHectares ha", color = palette.muted, fontSize = 10.sp)
                 }
                 Row(Modifier.border(1.dp, palette.border, MaterialTheme.shapes.small)
                     .padding(horizontal = 9.dp, vertical = 6.dp), verticalAlignment = Alignment.CenterVertically) {
                     Icon(Icons.Default.LocationOn, null, tint = palette.accent, modifier = Modifier.size(14.dp))
                     Spacer(Modifier.width(4.dp))
-                    Text("岐阜県養老町", color = palette.muted, fontSize = 10.sp)
+                    Text(location, color = palette.muted, fontSize = 10.sp)
                     Icon(Icons.Default.KeyboardArrowDown, null, tint = palette.muted, modifier = Modifier.size(15.dp))
                 }
             }
-            FarmMapCanvas(palette, selectedZone, onZoneSelected, Modifier.fillMaxSize())
+            FarmMapCanvas(palette, zones, selectedZone, onZoneSelected, Modifier.fillMaxSize())
         }
     }
 }
@@ -344,6 +401,7 @@ private fun FarmOverviewCard(
 @Composable
 private fun FarmMapCanvas(
     palette: DashboardPalette,
+    zones: List<Zone>,
     selectedZone: Zone,
     onZoneSelected: (Zone) -> Unit,
     modifier: Modifier,
@@ -362,7 +420,7 @@ private fun FarmMapCanvas(
                 listOf(.52f, .10f, .68f, .43f), listOf(.70f, .11f, .91f, .44f),
                 listOf(.08f, .53f, .45f, .88f), listOf(.49f, .52f, .84f, .89f),
             )
-            DummyData.zones.forEachIndexed { index, zone ->
+            zones.take(positions.size).forEachIndexed { index, zone ->
                 val p = positions[index]
                 val path = Path().apply {
                     moveTo(p[0] * size.width, p[1] * size.height)
@@ -381,10 +439,10 @@ private fun FarmMapCanvas(
         Column(Modifier.fillMaxSize().padding(horizontal = 18.dp, vertical = 26.dp),
             verticalArrangement = Arrangement.SpaceAround) {
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround) {
-                for (zone in DummyData.zones.take(4)) ZoneMapChip(zone, selectedZone, onZoneSelected)
+                for (zone in zones.take(4)) ZoneMapChip(zone, selectedZone, onZoneSelected)
             }
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround) {
-                for (zone in DummyData.zones.drop(4)) ZoneMapChip(zone, selectedZone, onZoneSelected)
+                for (zone in zones.drop(4).take(2)) ZoneMapChip(zone, selectedZone, onZoneSelected)
             }
         }
     }
@@ -412,11 +470,15 @@ private fun zoneColor(status: MoistureStatus): Color = when (status) {
 private fun IrrigationCard(
     palette: DashboardPalette,
     zone: Zone,
-    state: String,
+    state: IrrigationStatus,
+    runningIrrigationZoneId: String?,
     onExecute: () -> Unit,
     onDefer: () -> Unit,
     modifier: Modifier,
 ) {
+    val isLockedByAnotherZone =
+        runningIrrigationZoneId != null && runningIrrigationZoneId != zone.id
+
     Card(modifier, colors = CardDefaults.cardColors(containerColor = palette.surface),
         shape = MaterialTheme.shapes.medium, elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)) {
         Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -443,8 +505,9 @@ private fun IrrigationCard(
             }
             Text(
                 when {
-                    state == "running" -> "灌水を開始しました。バルブの状態を監視しています。"
-                    state == "deferred" -> "この提案は延期しました。次回確認は18:00です。"
+                    isLockedByAnotherZone -> "$runningIrrigationZoneId ゾーンの灌水を実行中です。完了後に操作できます。"
+                    state == IrrigationStatus.RUNNING -> "灌水を開始しました。バルブの状態を監視しています。"
+                    state == IrrigationStatus.DEFERRED -> "この提案は延期しました。次回確認は18:00です。"
                     zone.status == MoistureStatus.VERY_DRY -> "土壌水分が危険域です。24時間以内に灌水してください。"
                     zone.status == MoistureStatus.DRY -> "土壌水分が低下しています。本日中の灌水を推奨します。"
                     else -> "現在の土壌水分は適正範囲です。"
@@ -453,13 +516,15 @@ private fun IrrigationCard(
             )
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 Button(onClick = onExecute, Modifier.weight(1f),
+                    enabled = !isLockedByAnotherZone,
                     colors = ButtonDefaults.buttonColors(containerColor = palette.accent),
                     contentPadding = androidx.compose.foundation.layout.PaddingValues(vertical = 9.dp)) {
                     Icon(Icons.Default.PlayArrow, null, modifier = Modifier.size(15.dp))
                     Spacer(Modifier.width(4.dp))
-                    Text(if (state == "running") "実行中" else "灌水を実行", fontSize = 11.sp)
+                    Text(if (state == IrrigationStatus.RUNNING) "実行中" else "灌水を実行", fontSize = 11.sp)
                 }
                 OutlinedButton(onClick = onDefer, Modifier.weight(1f),
+                    enabled = !isLockedByAnotherZone,
                     contentPadding = androidx.compose.foundation.layout.PaddingValues(vertical = 9.dp)) {
                     Icon(Icons.Default.Schedule, null, modifier = Modifier.size(14.dp))
                     Spacer(Modifier.width(4.dp))
@@ -474,6 +539,7 @@ private fun IrrigationCard(
 @Composable
 private fun ZoneStatusCard(
     palette: DashboardPalette,
+    zones: List<Zone>,
     selectedZone: Zone,
     onZoneSelected: (Zone) -> Unit,
     modifier: Modifier,
@@ -496,7 +562,7 @@ private fun ZoneStatusCard(
                 TableHeader("Δ VALUE", .85f, palette)
                 TableHeader("AI", .35f, palette)
             }
-            DummyData.zones.forEach { zone ->
+            zones.forEach { zone ->
                 Row(Modifier.fillMaxWidth()
                     .background(if (zone.id == selectedZone.id) palette.accent.copy(alpha = .08f) else Color.Transparent)
                     .clickable { onZoneSelected(zone) }.padding(horizontal = 10.dp, vertical = 8.dp),
@@ -524,7 +590,8 @@ private fun RowScope.TableHeader(text: String, weight: Float, palette: Dashboard
 @Composable
 private fun AlertStatusCard(
     palette: DashboardPalette,
-    acknowledgedAlerts: Set<String>,
+    alerts: List<AlertItem>,
+    acknowledgedAlertIds: Set<String>,
     onAcknowledge: (String) -> Unit,
     modifier: Modifier,
 ) {
@@ -533,11 +600,11 @@ private fun AlertStatusCard(
         Column(Modifier.padding(16.dp)) {
             Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                 Text("アラート", color = palette.text, fontWeight = FontWeight.Bold, fontSize = 14.sp, modifier = Modifier.weight(1f))
-                Text("${DummyData.alerts.count { it.title !in acknowledgedAlerts }} 件未確認", color = palette.danger, fontSize = 10.sp)
+                Text("${alerts.count { it.id !in acknowledgedAlertIds }} 件未確認", color = palette.danger, fontSize = 10.sp)
             }
             Spacer(Modifier.height(7.dp))
-            DummyData.alerts.forEach { alert ->
-                AlertRow(palette, alert, alert.title in acknowledgedAlerts, onAcknowledge)
+            alerts.forEach { alert ->
+                AlertRow(palette, alert, alert.id in acknowledgedAlertIds, onAcknowledge)
             }
         }
     }
@@ -563,14 +630,19 @@ private fun AlertRow(palette: DashboardPalette, alert: AlertItem, acknowledged: 
             Text(alert.time, color = palette.muted, fontSize = 9.sp)
             if (!acknowledged) {
                 Text("確認", color = palette.accent, fontSize = 9.sp,
-                    modifier = Modifier.clickable { onAcknowledge(alert.title) }.padding(top = 3.dp))
+                    modifier = Modifier.clickable { onAcknowledge(alert.id) }.padding(top = 3.dp))
             }
         }
     }
 }
 
 @Composable
-private fun MoistureTrendCard(palette: DashboardPalette, selectedZone: Zone, modifier: Modifier) {
+private fun MoistureTrendCard(
+    palette: DashboardPalette,
+    selectedZone: Zone,
+    moistureHistory: List<Int>,
+    modifier: Modifier,
+) {
     Card(modifier, colors = CardDefaults.cardColors(containerColor = palette.surface),
         shape = MaterialTheme.shapes.medium, elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)) {
         Column(Modifier.padding(16.dp)) {
@@ -584,7 +656,7 @@ private fun MoistureTrendCard(palette: DashboardPalette, selectedZone: Zone, mod
                     Text("${selectedZone.delta}", color = palette.warning, fontSize = 11.sp, fontWeight = FontWeight.Bold)
                 }
             }
-            MoistureChart(palette, DummyData.moistureHistory, Modifier.fillMaxWidth().weight(1f))
+            MoistureChart(palette, moistureHistory, Modifier.fillMaxWidth().weight(1f))
         }
     }
 }
@@ -592,9 +664,11 @@ private fun MoistureTrendCard(palette: DashboardPalette, selectedZone: Zone, mod
 @Composable
 private fun MoistureChart(palette: DashboardPalette, values: List<Int>, modifier: Modifier) {
     Canvas(modifier.padding(top = 10.dp)) {
+        if (values.isEmpty()) return@Canvas
+
         val min = 1000f
         val max = 3000f
-        val stepX = size.width / (values.size - 1)
+        val stepX = if (values.size > 1) size.width / (values.size - 1) else 0f
         val points = values.mapIndexed { index, value ->
             Offset(index * stepX, size.height - ((value - min) / (max - min)).coerceIn(0f, 1f) * size.height)
         }
@@ -618,7 +692,7 @@ private fun MoistureChart(palette: DashboardPalette, values: List<Int>, modifier
 }
 
 @Composable
-private fun WeatherCard(palette: DashboardPalette, modifier: Modifier) {
+private fun WeatherCard(weather: List<WeatherDay>, palette: DashboardPalette, modifier: Modifier) {
     Card(modifier, colors = CardDefaults.cardColors(containerColor = palette.surface),
         shape = MaterialTheme.shapes.medium, elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)) {
         Column(Modifier.padding(16.dp)) {
@@ -628,7 +702,7 @@ private fun WeatherCard(palette: DashboardPalette, modifier: Modifier) {
             }
             Spacer(Modifier.height(9.dp))
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                DummyData.weather.forEach { day ->
+                weather.forEach { day ->
                     Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.padding(horizontal = 4.dp)) {
                         Text(day.date.substringBefore(" "), color = palette.muted, fontSize = 9.sp)
                         Text(day.icon, fontSize = 20.sp, modifier = Modifier.padding(vertical = 7.dp))
@@ -643,7 +717,7 @@ private fun WeatherCard(palette: DashboardPalette, modifier: Modifier) {
 }
 
 @Composable
-private fun WorkLogCard(palette: DashboardPalette) {
+private fun WorkLogCard(workLogs: List<WorkLog>, palette: DashboardPalette) {
     Card(Modifier.fillMaxWidth(), colors = CardDefaults.cardColors(containerColor = palette.surface),
         shape = MaterialTheme.shapes.medium, elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)) {
         Row(Modifier.fillMaxWidth().padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
@@ -651,7 +725,11 @@ private fun WorkLogCard(palette: DashboardPalette) {
             Spacer(Modifier.width(10.dp))
             Column(Modifier.weight(1f)) {
                 Text("今日の作業記録", color = palette.text, fontWeight = FontWeight.Bold, fontSize = 13.sp)
-                Text("散水ポンプ点検 • 08:30  |  B-01 生育確認 • 10:15", color = palette.muted, fontSize = 10.sp)
+                Text(
+                    workLogs.joinToString("  |  ") { "${it.title} • ${it.time}" }.ifEmpty { "本日の作業記録はありません" },
+                    color = palette.muted,
+                    fontSize = 10.sp,
+                )
             }
             Text("すべて見る  ›", color = palette.accent, fontSize = 10.sp)
         }

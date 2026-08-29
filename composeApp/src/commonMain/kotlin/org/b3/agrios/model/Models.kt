@@ -22,6 +22,7 @@ data class Zone(
 )
 
 data class AlertItem(
+    val id: String,
     val title: String,
     val message: String,
     val time: String,
@@ -40,4 +41,21 @@ data class WeatherDay(
     val high: Int,
     val low: Int,
     val rainChance: Int,
+)
+
+data class WorkLog(
+    val title: String,
+    val time: String,
+)
+
+data class DashboardSnapshot(
+    val farmName: String,
+    val areaHectares: Double,
+    val location: String,
+    val lastSyncedAt: String,
+    val zones: List<Zone>,
+    val alerts: List<AlertItem>,
+    val weather: List<WeatherDay>,
+    val moistureHistory: List<Int>,
+    val workLogs: List<WorkLog>,
 )

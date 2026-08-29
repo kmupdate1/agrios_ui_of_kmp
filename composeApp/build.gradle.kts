@@ -39,6 +39,10 @@ kotlin {
             implementation(libs.kotlinx.datetime)
         }
 
+        commonTest.dependencies {
+            implementation(kotlin("test"))
+        }
+
         val desktopMain by getting
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
