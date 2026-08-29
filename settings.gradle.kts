@@ -13,9 +13,11 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "agrios_ui"
+rootProject.name = "agrios_console"
 include(
+	":app-runtime",
 	":application",
 	":ui-system",
 	":http-client",
+	":resource-parser",
 )

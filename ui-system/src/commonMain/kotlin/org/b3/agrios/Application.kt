@@ -29,7 +29,7 @@ object Application : Lifecycle {
     }
 
     @Composable
-    override fun startContent() {
+    override fun Content() {
         onLoad()
 
         uiLifecycle.onPrepare(drawable)

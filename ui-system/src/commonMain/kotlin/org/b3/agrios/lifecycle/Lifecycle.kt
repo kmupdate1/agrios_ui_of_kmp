@@ -9,5 +9,5 @@ interface Lifecycle :
     Startable,
     Stoppable,
     Destroyable {
-    @Composable fun startContent()
+    @Composable fun Content()
 }

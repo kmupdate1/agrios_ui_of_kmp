@@ -5,8 +5,7 @@ import androidx.compose.runtime.Composable
 import org.b3.agrios.ui.capability.Drawable
 import org.b3.agrios.ui.container.ContainerView
 import org.b3.agrios.ui.theme.AgriOsShapes
-import org.b3.agrios.ui.theme.DarkColorScheme
-import org.b3.agrios.ui.theme.LightColorScheme
+import org.b3.agrios.ui.theme.ColorScheme
 
 class AgriOsConsoleThemeContainerView(
     private val isDarkTheme: Boolean,
@@ -20,7 +19,9 @@ class AgriOsConsoleThemeContainerView(
     @Composable
     override fun onRender() {
         MaterialTheme(
-            colorScheme = if (isDarkTheme) DarkColorScheme else LightColorScheme,
+            colorScheme =
+                if (isDarkTheme) ColorScheme.DarkColorScheme
+                else ColorScheme.LightColorScheme,
             shapes = AgriOsShapes,
             content = drawable::onRender,
         )

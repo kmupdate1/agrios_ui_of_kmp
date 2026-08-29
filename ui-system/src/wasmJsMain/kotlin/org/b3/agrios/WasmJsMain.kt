@@ -12,7 +12,7 @@ object WasmJsMain : Bootable {
 
         ComposeViewport(
             viewportContainerId = VIEWPORT_CONTAINER_ID,
-            content = ::startContent,
+            content = ::Content,
         )
     }
 
