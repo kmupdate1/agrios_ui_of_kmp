@@ -1,6 +1,5 @@
 plugins {
     kotlin("jvm")
-    kotlin("plugin.serialization")
 }
 
 kotlin {
@@ -8,7 +7,9 @@ kotlin {
 }
 
 dependencies {
-    implementation(libs.kotlinx.serialization.xml)
+    implementation(libs.pdvrieze.xmlutl.core)
+    implementation(libs.pdvrieze.xmlutl.serialization)
+
     testImplementation(kotlin("test"))
 }
 
