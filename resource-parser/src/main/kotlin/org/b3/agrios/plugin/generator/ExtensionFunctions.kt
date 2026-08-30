@@ -2,6 +2,11 @@ package org.b3.agrios.plugin.generator
 
 internal fun String.toKotlinIdentifier(): String =
     replace(Regex("[^A-Za-z0-9_]"), "_")
+        .split('_')
+        .filter { it.isNotEmpty() }
+        .joinToString("") { part ->
+            part.replaceFirstChar { it.uppercase() }
+        }
         .let { identifier ->
             if (identifier.firstOrNull()?.isDigit() == true) {
                 "_$identifier"
