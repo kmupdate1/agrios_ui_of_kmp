@@ -3,9 +3,9 @@ package org.b3.agrios.plugin.res.parser.xml
 import org.b3.agrios.plugin.res.parser.Parser
 import java.io.File
 
-class FileXmlParser<T>(
-    private val parser: StringXmlParser<T>,
-) : Parser<File, T> {
-    override fun parse(input: File): T =
+class StringFileXmlParser<T>(
+    private val parser: StringXmlParser,
+) : Parser<File, XmlDocument> {
+    override fun parse(input: File): XmlDocument =
         parser.parse(input = input.readText())
 }
