@@ -1,4 +1,5 @@
 plugins {
+    `java-gradle-plugin`
     kotlin("jvm")
 }
 
@@ -9,6 +10,8 @@ kotlin {
 dependencies {
     implementation(libs.pdvrieze.xmlutl.core)
     implementation(libs.pdvrieze.xmlutl.serialization)
+
+    implementation(kotlin("gradle-plugin"))
 
     testImplementation(kotlin("test"))
 }

@@ -1,5 +1,6 @@
 import org.b3.agrios.plugin.generator.ColorsKotlinGenerator
 import org.b3.agrios.plugin.generator.StringsKotlinGenerator
+import org.b3.agrios.plugin.res.model.StringsResource
 import org.b3.agrios.plugin.res.parser.xml.BytesFileXmlParser
 import org.b3.agrios.plugin.res.parser.xml.DefaultBytesXmlParser
 import org.b3.agrios.plugin.res.values.ColorsResourceParser
@@ -8,6 +9,7 @@ import org.b3.agrios.plugin.writer.KtFileWriter
 import org.junit.jupiter.api.Test
 import java.io.File
 import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 class TestApplication {
     @Test
@@ -88,6 +90,13 @@ class TestApplication {
             fileName = "Colors",
             source = ColorsKotlinGenerator().generate(colors)
         )
+
+        assertTrue(File("build/generate/Strings.kt").exists())
+        assertTrue(File("build/generate/Colors.kt").exists())
+    }
+
+    fun 生成コード使ってみる() {
+
     }
 
     private val bytesFileParser = BytesFileXmlParser(
