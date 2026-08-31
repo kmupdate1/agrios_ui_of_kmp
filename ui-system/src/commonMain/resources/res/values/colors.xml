@@ -1,6 +1,7 @@
 <?xml version="1.1" encoding="UTF-8"?>
 <resources>
     <type name="light">
+        <!-- Primary -->
         <color name="primary">#2EAD58</color>
         <color name="onPrimary">#FFFFFF</color>
         <color name="primaryContainer">#D6F5DF</color>
@@ -26,10 +27,11 @@
         <color name="surface">#FFFFFF</color>
         <color name="onSurface">#121212</color>
         <color name="surfaceVariant">#EFF2F4</color>
-        <color name="onSurfaceVariant">#4A4F52</color>
+        <color name="onSurfaceVariant">#3F474D</color>
 
         <!-- Outline -->
-        <color name="outline">#D8DEE3</color>
+        <color name="outline">#2EAD58</color>
+        <color name="outlineVariant">#E3E7EA</color>
 
         <!-- Error -->
         <color name="error">#BA1A1A</color>
@@ -52,7 +54,7 @@
         <color name="primary">#72D98C</color>
         <color name="onPrimary">#003914</color>
         <color name="primaryContainer">#075322</color>
-        <color name="onPrimaryContainer">#88F3C6</color>
+        <color name="onPrimaryContainer">#B8F3C6</color>
 
         <!-- Secondary -->
         <color name="secondary">#9AC9A7</color>
@@ -68,16 +70,17 @@
 
         <!-- Background -->
         <color name="background">#121212</color>
-        <color name="onBackground">#F1F1F1</color>
+        <color name="onBackground">#F5F5F5</color>
 
         <!-- Surface -->
-        <color name="surface">#1E1E1E</color>
-        <color name="onSurface">#F1F1F1</color>
+        <color name="surface">#0F0F0F</color>
+        <color name="onSurface">#F5F5F5</color>
         <color name="surfaceVariant">#2A2D2F</color>
-        <color name="onSurfaceVariant">#C4C7C9</color>
+        <color name="onSurfaceVariant">#D0D5D8</color>
 
         <!-- Outline -->
-        <color name="outline">#3A3F44</color>
+        <color name="outline">#72D98C</color>
+        <color name="outlineVariant">#454A4F</color>
 
         <!-- Error -->
         <color name="error">#FFB4AB</color>

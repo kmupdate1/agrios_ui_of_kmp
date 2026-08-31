@@ -3,11 +3,12 @@ package org.b3.agrios.ui.theme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.ui.graphics.Color
+import org.b3.agrios.generated.resource.Colors
 
 internal object ColorScheme {
     val LightColorScheme = lightColorScheme(
-        primary = Color(0xFF2EAD58),
-        onPrimary = Color(0xFFFFFFFF),
+        primary = Color(Colors.Light.PRIMARY),
+        onPrimary = Color(Colors.Light.ON_PRIMARY),
 
         primaryContainer = Color(0xFFD6F5DF),
         onPrimaryContainer = Color(0xFF0B3B1A),

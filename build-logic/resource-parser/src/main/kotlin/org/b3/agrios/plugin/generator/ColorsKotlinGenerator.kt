@@ -14,9 +14,18 @@ class ColorsKotlinGenerator {
                     appendLine("    object ${type.toKotlinIdentifier()} {")
 
                     colors.forEach { color ->
+                        val value = color.value
+                            .removePrefix("#")
+                            .let {
+                                if (it.length == 6) {
+                                    "0xFF$it"
+                                } else {
+                                    "0x$it"
+                                }
+                            }
+
                         appendLine(
-                            "        const val ${color.name.toKotlinConstName()} = " +
-                                    color.value.toKotlinString()
+                            "        const val ${color.name.toKotlinConstName()}: Long = $value",
                         )
                     }
 
