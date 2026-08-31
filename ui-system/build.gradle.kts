@@ -6,6 +6,8 @@ plugins {
     kotlin("plugin.compose")
     id("org.jetbrains.compose")
     // id("com.android.kotlin.multiplatform.library")
+
+    id("org.b3.agrios.plugin.resource")
 }
 
 kotlin {

@@ -2,15 +2,11 @@
 datetime = "0.8.0"
 browser = "0.5.0"
 maplibre = "0.14.0"
-xmlutil = "1.0.1"
 
 [libraries]
 kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "datetime" }
 kotlinx-browswer = { group = "org.jetbrains.kotlinx", name = "kotlinx-browser", version.ref = "browser" }
 
 maplibre-compose = { group = "org.maplibre.compose", name = "maplibre-compose", version.ref = "maplibre" }
-
-pdvrieze-xmlutl-core = { group = "io.github.pdvrieze.xmlutil", name = "core", version.ref = "xmlutil" }
-pdvrieze-xmlutl-serialization = { group = "io.github.pdvrieze.xmlutil", name = "serialization", version.ref = "xmlutil" }
 
 [bundles]
