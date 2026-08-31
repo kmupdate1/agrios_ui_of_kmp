@@ -23,12 +23,6 @@ class SideNavContainerView(
 ) {
     override fun onReorder() {  }
 
-    @Deprecated("", level = DeprecationLevel.WARNING)
-    @Composable
-    override fun onReCompose() {
-        super.onReCompose()
-    }
-
     @Composable
     override fun onRender() {
         renderingModifier = modifier

@@ -4,14 +4,14 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import org.b3.agrios.lifecycle.Lifecycle
 import org.b3.agrios.ui.AgriOsConsoleRootComposition
-import org.b3.agrios.ui.capability.Drawable
+import org.b3.agrios.ui.capability.Renderable
 import org.b3.agrios.ui.impl.console.AgriOsConsoleThemeContainerView
 import org.b3.agrios.ui.lifecycle.UiLifecycle
 import org.b3.agrios.ui.view.View
 
 object Application : Lifecycle {
     override fun onCreate() {
-        drawable = uiLifecycle.onCreate()
+        renderable = uiLifecycle.onCreate()
     }
 
     override fun onPrepare() { }
@@ -32,25 +32,23 @@ object Application : Lifecycle {
     override fun Content() {
         onLoad()
 
-        uiLifecycle.onPrepare(drawable)
+        uiLifecycle.onPrepare()
         uiLifecycle.onStart()
 
         onStart()
     }
 
-    private lateinit var drawable: Drawable
+    private lateinit var renderable: Renderable
     private val uiLifecycle: UiLifecycle = object : UiLifecycle {
-        override fun onCreate(): Drawable =
+        override fun onCreate(): Renderable =
             AgriOsConsoleRootComposition.compose()
 
         @Composable
-        override fun onPrepare(drawable: Drawable) {
+        override fun onPrepare() {
             view = AgriOsConsoleThemeContainerView(
                 isDarkTheme = isSystemInDarkTheme(),
-                drawable = drawable,
+                renderable = renderable,
             )
-
-            view.onReCompose()
         }
 
         @Composable

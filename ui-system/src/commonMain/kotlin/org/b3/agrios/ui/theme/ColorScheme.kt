@@ -9,40 +9,80 @@ internal object ColorScheme {
     val LightColorScheme = lightColorScheme(
         primary = Color(Colors.Light.PRIMARY),
         onPrimary = Color(Colors.Light.ON_PRIMARY),
+        primaryContainer = Color(Colors.Light.PRIMARY_CONTAINER),
+        onPrimaryContainer = Color(Colors.Light.ON_PRIMARY_CONTAINER),
 
-        primaryContainer = Color(0xFFD6F5DF),
-        onPrimaryContainer = Color(0xFF0B3B1A),
+        secondary = Color(Colors.Light.SECONDARY),
+        onSecondary = Color(Colors.Light.ON_SECONDARY),
+        secondaryContainer = Color(Colors.Light.SECONDARY_CONTAINER),
+        onSecondaryContainer = Color(Colors.Light.ON_SECONDARY_CONTAINER),
 
-        background = Color(0xFFF5F7F9),
-        onBackground = Color(0xFF121212),
+        tertiary = Color(Colors.Light.TERTIARY),
+        onTertiary = Color(Colors.Light.ON_TERTIARY),
+        tertiaryContainer = Color(Colors.Light.TERTIARY_CONTAINER),
+        onTertiaryContainer = Color(Colors.Light.ON_TERTIARY_CONTAINER),
 
-        surface = Color(0xFFFFFFFF),
-        onSurface = Color(0xFF121212),
+        background = Color(Colors.Light.BACKGROUND),
+        onBackground = Color(Colors.Light.ON_BACKGROUND),
 
-        surfaceVariant = Color(0xFFEFF2F4),
-        onSurfaceVariant = Color(0xFF3F474D),
+        surface = Color(Colors.Light.SURFACE),
+        onSurface = Color(Colors.Light.ON_SURFACE),
+        surfaceVariant = Color(Colors.Light.SURFACE_VARIANT),
+        onSurfaceVariant = Color(Colors.Light.ON_SURFACE_VARIANT),
 
-        outline = Color(0xFF2EAD58),
-        outlineVariant = Color(0xFFE3E7EA),
+        outline = Color(Colors.Light.OUTLINE),
+        outlineVariant = Color(Colors.Light.OUTLINE_VARIANT),
+
+        error = Color(Colors.Light.ERROR),
+        onError = Color(Colors.Light.ON_ERROR),
+        errorContainer = Color(Colors.Light.ERROR_CONTAINER),
+        onErrorContainer = Color(Colors.Light.ON_ERROR_CONTAINER),
+
+        inverseSurface = Color(Colors.Light.INVERSE_SURFACE),
+        inverseOnSurface = Color(Colors.Light.INVERSE_ON_SURFACE),
+        inversePrimary = Color(Colors.Light.INVERSE_PRIMARY),
+
+        scrim = Color(Colors.Light.SCRIM),
+        surfaceTint = Color(Colors.Light.SURFACE_TINT),
     )
 
     val DarkColorScheme = darkColorScheme(
-        primary = Color(0xFF72D98C),
-        onPrimary = Color(0xFF003914),
+        primary = Color(Colors.Dark.PRIMARY),
+        onPrimary = Color(Colors.Dark.ON_PRIMARY),
+        primaryContainer = Color(Colors.Dark.PRIMARY_CONTAINER),
+        onPrimaryContainer = Color(Colors.Dark.ON_PRIMARY_CONTAINER),
 
-        primaryContainer = Color(0xFF075322),
-        onPrimaryContainer = Color(0xFFB8F3C6),
+        secondary = Color(Colors.Dark.SECONDARY),
+        onSecondary = Color(Colors.Dark.ON_SECONDARY),
+        secondaryContainer = Color(Colors.Dark.SECONDARY_CONTAINER),
+        onSecondaryContainer = Color(Colors.Dark.ON_SECONDARY_CONTAINER),
 
-        background = Color(0xFF121212),
-        onBackground = Color(0xFFF5F5F5),
+        tertiary = Color(Colors.Dark.TERTIARY),
+        onTertiary = Color(Colors.Dark.ON_TERTIARY),
+        tertiaryContainer = Color(Colors.Dark.TERTIARY_CONTAINER),
+        onTertiaryContainer = Color(Colors.Dark.ON_TERTIARY_CONTAINER),
 
-        surface = Color(0xFF0F0F0F),
-        onSurface = Color(0xFFF5F5F5),
+        background = Color(Colors.Dark.BACKGROUND),
+        onBackground = Color(Colors.Dark.ON_BACKGROUND),
 
-        surfaceVariant = Color(0xFF2A2D2F),
-        onSurfaceVariant = Color(0xFFD0D5D8),
+        surface = Color(Colors.Dark.SURFACE),
+        onSurface = Color(Colors.Dark.ON_SURFACE),
+        surfaceVariant = Color(Colors.Dark.SURFACE_VARIANT),
+        onSurfaceVariant = Color(Colors.Dark.ON_SURFACE_VARIANT),
 
-        outline = Color(0xFF72D98C),
-        outlineVariant = Color(0xFF454A4F),
+        outline = Color(Colors.Dark.OUTLINE),
+        outlineVariant = Color(Colors.Dark.OUTLINE_VARIANT),
+
+        error = Color(Colors.Dark.ERROR),
+        onError = Color(Colors.Dark.ON_ERROR),
+        errorContainer = Color(Colors.Dark.ERROR_CONTAINER),
+        onErrorContainer = Color(Colors.Dark.ON_ERROR_CONTAINER),
+
+        inverseSurface = Color(Colors.Dark.INVERSE_SURFACE),
+        inverseOnSurface = Color(Colors.Dark.INVERSE_ON_SURFACE),
+        inversePrimary = Color(Colors.Dark.INVERSE_PRIMARY),
+
+        scrim = Color(Colors.Dark.SCRIM),
+        surfaceTint = Color(Colors.Dark.SURFACE_TINT),
     )
 }

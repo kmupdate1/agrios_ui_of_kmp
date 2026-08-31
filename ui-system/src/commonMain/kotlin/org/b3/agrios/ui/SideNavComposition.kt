@@ -29,9 +29,6 @@ object SideNavComposition {
             ContentViewContext("sidenav_title", "SideNav Title")
 
         @Composable
-        override fun onReCompose() { }
-
-        @Composable
         override fun onRender() = super.create(modifier = Modifier, content = {
             Row {
                 Icon(
@@ -55,9 +52,6 @@ object SideNavComposition {
                         ContentViewContext("sidenav_item_group", "Item Group")
 
                     @Composable
-                    override fun onReCompose() { }
-
-                    @Composable
                     override fun onRender() = super.create(modifier = Modifier, content = {
                         Icon(imageVector = Icons.Outlined.Settings, contentDescription = null)
                     })
@@ -67,9 +61,6 @@ object SideNavComposition {
                         ContentViewContext("sidenav_item_title", "Item Title")
 
                     @Composable
-                    override fun onReCompose() { }
-
-                    @Composable
                     override fun onRender() = super.create(modifier = Modifier, content = {
                         Text("|Settings")
                     })
@@ -77,9 +68,6 @@ object SideNavComposition {
                 notification = object : ContentViewShell() {
                     override val context: ContentViewContext =
                         ContentViewContext("", "")
-
-                    @Composable
-                    override fun onReCompose() { }
 
                     @Composable
                     override fun onRender() = super.create(modifier = Modifier, content = {})
@@ -99,9 +87,6 @@ object SideNavComposition {
                 ContentViewContext("column_title", "Column Title")
 
             @Composable
-            override fun onReCompose() { }
-
-            @Composable
             override fun onRender() = super.create(modifier = Modifier, content = {
                 Text("System Status")
             })
@@ -110,9 +95,6 @@ object SideNavComposition {
             content = object : ContentViewShell() {
                 override val context: ContentViewContext =
                     ContentViewContext("column_content_group", "Column ContentGroup")
-
-                @Composable
-                override fun onReCompose() { }
 
                 @Composable
                 override fun onRender() = super.create(modifier = Modifier, content = {
@@ -124,9 +106,6 @@ object SideNavComposition {
                     ContentViewContext("column_status", "Column Status")
 
                 @Composable
-                override fun onReCompose() { }
-
-                @Composable
                 override fun onRender() = super.create(modifier = Modifier, content = {
                     Text("|🟢")
                 })
@@ -134,9 +113,6 @@ object SideNavComposition {
             description = object : ContentViewShell() {
                 override val context: ContentViewContext =
                     ContentViewContext("column_description", "Column Description")
-
-                @Composable
-                override fun onReCompose() { }
 
                 @Composable
                 override fun onRender() = super.create(modifier = Modifier, content = {

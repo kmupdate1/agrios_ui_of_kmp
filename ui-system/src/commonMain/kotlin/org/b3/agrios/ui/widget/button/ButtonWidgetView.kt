@@ -26,9 +26,6 @@ abstract class ButtonWidgetView(
     protected abstract fun onContent()
 
     @Composable
-    override fun onReCompose() {}
-
-    @Composable
     override fun onRender() {
         when (variant) {
             ButtonVariant.Primary -> {

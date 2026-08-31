@@ -7,13 +7,13 @@ import nl.adaptivity.xmlutil.core.KtXmlReader
 @OptIn(ExperimentalXmlUtilApi::class)
 class DefaultBytesXmlParser : BytesXmlParser() {
     override fun parseXml(reader: KtXmlReader): XmlDocument {
-        var root: XmlNode.XmlElement? = null
-        val stack = ArrayDeque<XmlNode.XmlElement>()
+        var root: XmlNode.Element? = null
+        val stack = ArrayDeque<XmlNode.Element>()
 
         while (reader.hasNext()) {
             when (reader.next()) {
                 EventType.START_ELEMENT -> {
-                    val element = XmlNode.XmlElement(
+                    val element = XmlNode.Element(
                         name = reader.name.localPart,
                         attributes = buildMap {
                             repeat(reader.attributeCount) { index ->
@@ -36,7 +36,7 @@ class DefaultBytesXmlParser : BytesXmlParser() {
                 }
 
                 EventType.TEXT -> {
-                    val text = XmlNode.XmlText(reader.text)
+                    val text = XmlNode.Value(reader.text)
 
                     stack.lastOrNull()
                         ?.let { (it.children as MutableList).add(text) }

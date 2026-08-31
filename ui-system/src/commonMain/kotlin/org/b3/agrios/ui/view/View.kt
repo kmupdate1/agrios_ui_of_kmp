@@ -1,5 +1,5 @@
 package org.b3.agrios.ui.view
 
-import org.b3.agrios.ui.capability.Drawable
+import org.b3.agrios.ui.capability.Renderable
 
-interface View : Drawable
+interface View : Renderable

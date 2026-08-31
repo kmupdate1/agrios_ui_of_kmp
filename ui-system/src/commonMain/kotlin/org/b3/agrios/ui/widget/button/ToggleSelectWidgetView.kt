@@ -13,9 +13,6 @@ class ToggleSelectWidgetView<T>(
     private val onSelected: (T) -> Unit
 ) : View {
     @Composable
-    override fun onReCompose() { }
-
-    @Composable
     override fun onRender() {
         Row {
             values.forEach { item ->

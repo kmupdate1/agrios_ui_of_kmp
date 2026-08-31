@@ -12,12 +12,6 @@ abstract class VerticalListContainerView(
     children = children,
     modifier = modifier,
 ) {
-    @Deprecated("", level = DeprecationLevel.WARNING)
-    @Composable
-    override fun onReCompose() {
-        super.onReCompose()
-    }
-
     @Composable
     override fun onRender() {
         Column(modifier = renderingModifier) { super.onRender() }
