@@ -70,7 +70,7 @@ abstract class GenerateResourceTask : DefaultTask() {
     )
 
     companion object {
-        const val DEFAULT_RESOURCE_DIR = "src/main/resources/res"
+        const val DEFAULT_RESOURCE_DIR = "src/commonMain/resources/res"
         const val DEFAULT_OUTPUT_DIR = "generated/sources/agrios/kotlin"
     }
 }

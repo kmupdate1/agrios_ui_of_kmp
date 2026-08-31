@@ -5,6 +5,7 @@ import org.b3.agrios.plugin.res.model.ColorsResource
 class ColorsKotlinGenerator {
     fun generate(resources: List<ColorsResource>): String =
         buildString {
+            appendLine("package org.b3.agrios.generated.resource\n")
             appendLine("object Colors {")
 
             resources
@@ -14,7 +15,7 @@ class ColorsKotlinGenerator {
 
                     colors.forEach { color ->
                         appendLine(
-                            "        val ${color.name.toKotlinIdentifier()} = " +
+                            "        const val ${color.name.toKotlinConstName()} = " +
                                     color.value.toKotlinString()
                         )
                     }

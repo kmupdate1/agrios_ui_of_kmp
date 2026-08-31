@@ -14,7 +14,7 @@ class ResourcePlugin : Plugin<Project> {
                 target.layout.projectDirectory.dir(GenerateResourceTask.DEFAULT_RESOURCE_DIR)
             )
             task.outputDirectory.set(
-                target.layout.projectDirectory.dir(GenerateResourceTask.DEFAULT_OUTPUT_DIR)
+                target.layout.buildDirectory.dir(GenerateResourceTask.DEFAULT_OUTPUT_DIR)
             )
         }
 

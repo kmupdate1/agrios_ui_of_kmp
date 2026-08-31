@@ -15,6 +15,20 @@ internal fun String.toKotlinIdentifier(): String =
             }
         }
 
+internal fun String.toKotlinConstName(): String =
+    replace(Regex("([a-z0-9])([A-Z])"), "$1_$2")
+        .replace(Regex("[^A-Za-z0-9_]"), "_")
+        .replace(Regex("_+"), "_")
+        .trim('_')
+        .uppercase()
+        .let { identifier ->
+            if (identifier.firstOrNull()?.isDigit() == true) {
+                "_$identifier"
+            } else {
+                identifier
+            }
+        }
+
 internal fun String.toKotlinString(): String =
     buildString {
         append('"')

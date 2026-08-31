@@ -5,6 +5,8 @@ import org.b3.agrios.plugin.res.model.StringsResource
 class StringsKotlinGenerator {
     fun generate(resources: List<StringsResource>): String =
         buildString {
+            appendLine("package org.b3.agrios.generated.resource\n")
+            appendLine("import androidx.compose.ui.text.intl.Locale\n")
             appendLine("object Strings {")
 
             resources
