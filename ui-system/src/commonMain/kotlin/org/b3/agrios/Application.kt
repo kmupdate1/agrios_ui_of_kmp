@@ -39,6 +39,7 @@ object Application : Lifecycle {
     }
 
     private lateinit var renderable: Renderable
+
     private val uiLifecycle: UiLifecycle = object : UiLifecycle {
         override fun onCreate(): Renderable =
             AgriOsConsoleRootComposition.compose()
