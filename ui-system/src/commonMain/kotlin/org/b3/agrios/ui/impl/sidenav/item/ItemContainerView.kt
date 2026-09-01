@@ -1,5 +1,6 @@
 package org.b3.agrios.ui.impl.sidenav.item
 
+import org.b3.agrios.generated.resource.StylesKey
 import org.b3.agrios.ui.capability.Draggable
 import org.b3.agrios.ui.capability.Movable
 import org.b3.agrios.ui.capability.Selectable
@@ -21,4 +22,7 @@ class ItemContainerView(
     override fun onMove(x: Int, y: Int) { }
 
     override fun onDrag() { }
+
+    override val stylesKey: StylesKey
+        get() = TODO("Not yet implemented")
 }

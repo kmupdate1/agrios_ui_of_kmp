@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import org.b3.agrios.generated.resource.StylesKey
 import org.b3.agrios.ui.capability.Renderable
 import org.b3.agrios.ui.container.ContainerView
 import org.b3.agrios.ui.theme.AgriOsShapes
@@ -15,6 +16,9 @@ class AgriOsConsoleThemeContainerView(
     private val isDarkTheme: Boolean,
     private val renderable: Renderable,
 ) : ContainerView {
+    override val stylesKey: StylesKey
+        get() = TODO("Not yet implemented")
+
     @Composable
     override fun onRender() {
         MaterialTheme(

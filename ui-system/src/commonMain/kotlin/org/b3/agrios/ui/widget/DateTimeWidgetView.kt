@@ -7,6 +7,7 @@ import kotlinx.datetime.TimeZone
 import kotlinx.datetime.format
 import kotlinx.datetime.format.DateTimeFormat
 import kotlinx.datetime.toLocalDateTime
+import org.b3.agrios.generated.resource.StylesKey
 import org.b3.agrios.ui.view.View
 import kotlin.time.Instant
 
@@ -15,6 +16,9 @@ class DateTimeWidgetView(
     private val timeZone: TimeZone,
     private val format: DateTimeFormat<LocalDateTime>,
 ) : View {
+    override val stylesKey: StylesKey
+        get() = TODO("Not yet implemented")
+
     @Composable
     override fun onRender() {
         Text(

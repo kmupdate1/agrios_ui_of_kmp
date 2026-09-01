@@ -6,6 +6,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import org.b3.agrios.generated.resource.StylesKey
 import org.b3.agrios.ui.capability.Reorderable
 import org.b3.agrios.ui.container.VerticalListContainerView
 import org.b3.agrios.ui.content.ContentView
@@ -21,6 +22,9 @@ class SideNavContainerView(
     children = listOf(title, itemGroup, column),
     modifier = modifier,
 ) {
+    override val stylesKey: StylesKey
+        get() = TODO("Not yet implemented")
+
     override fun onReorder() {  }
 
     @Composable

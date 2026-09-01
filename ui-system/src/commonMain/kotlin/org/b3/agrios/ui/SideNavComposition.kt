@@ -13,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import org.b3.agrios.generated.resource.StylesKey
 import org.b3.agrios.ui.content.ContentView
 import org.b3.agrios.ui.content.ContentViewContext
 import org.b3.agrios.ui.content.ContentViewShell
@@ -25,6 +26,9 @@ import org.b3.agrios.ui.widget.button.ExecuteButtonWidgetView
 
 object SideNavComposition {
     fun composeTitle(): ContentView = object : ContentViewShell() {
+        override val stylesKey: StylesKey
+            get() = TODO("Not yet implemented")
+
         override val context: ContentViewContext =
             ContentViewContext("sidenav_title", "SideNav Title")
 
@@ -48,6 +52,9 @@ object SideNavComposition {
         items = listOf(
             ItemContainerView(
                 icon = object : ContentViewShell() {
+                    override val stylesKey: StylesKey
+                        get() = TODO("Not yet implemented")
+
                     override val context: ContentViewContext =
                         ContentViewContext("sidenav_item_group", "Item Group")
 
@@ -57,6 +64,9 @@ object SideNavComposition {
                     })
                 },
                 title = object : ContentViewShell() {
+                    override val stylesKey: StylesKey
+                        get() = TODO("Not yet implemented")
+
                     override val context: ContentViewContext =
                         ContentViewContext("sidenav_item_title", "Item Title")
 
@@ -66,6 +76,9 @@ object SideNavComposition {
                     })
                 },
                 notification = object : ContentViewShell() {
+                    override val stylesKey: StylesKey
+                        get() = TODO("Not yet implemented")
+
                     override val context: ContentViewContext =
                         ContentViewContext("", "")
 
@@ -83,6 +96,9 @@ object SideNavComposition {
     )
     fun composeColumn(): ColumnContainerView = ColumnContainerView(
         title = object : ContentViewShell() {
+            override val stylesKey: StylesKey
+                get() = TODO("Not yet implemented")
+
             override val context: ContentViewContext =
                 ContentViewContext("column_title", "Column Title")
 
@@ -93,6 +109,9 @@ object SideNavComposition {
         },
         contentGroup = ColumnContentGroupContainerView(
             content = object : ContentViewShell() {
+                override val stylesKey: StylesKey
+                    get() = TODO("Not yet implemented")
+
                 override val context: ContentViewContext =
                     ContentViewContext("column_content_group", "Column ContentGroup")
 
@@ -102,6 +121,9 @@ object SideNavComposition {
                 })
             },
             status = object : ContentViewShell() {
+                override val stylesKey: StylesKey
+                    get() = TODO("Not yet implemented")
+
                 override val context: ContentViewContext =
                     ContentViewContext("column_status", "Column Status")
 
@@ -111,6 +133,9 @@ object SideNavComposition {
                 })
             },
             description = object : ContentViewShell() {
+                override val stylesKey: StylesKey
+                    get() = TODO("Not yet implemented")
+
                 override val context: ContentViewContext =
                     ContentViewContext("column_description", "Column Description")
 
@@ -121,6 +146,9 @@ object SideNavComposition {
             },
         ),
         button = object : ExecuteButtonWidgetView(modifier = Modifier.fillMaxWidth()) {
+            override val stylesKey: StylesKey
+                get() = TODO("Not yet implemented")
+
             override val context: ContentViewContext =
                 ContentViewContext("", "")
 

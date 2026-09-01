@@ -1,5 +1,6 @@
 package org.b3.agrios.ui.impl.map
 
+import org.b3.agrios.generated.resource.StylesKey
 import org.b3.agrios.ui.container.OverlayContainerView
 import org.b3.agrios.ui.content.FieldMapContentView
 
@@ -31,4 +32,7 @@ class FieldMapContainerView(
     override fun onExit() {
         TODO("Not yet implemented")
     }
+
+    override val stylesKey: StylesKey
+        get() = TODO("Not yet implemented")
 }

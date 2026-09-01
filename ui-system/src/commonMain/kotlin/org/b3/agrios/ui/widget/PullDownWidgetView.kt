@@ -3,6 +3,7 @@ package org.b3.agrios.ui.widget
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import org.b3.agrios.generated.resource.StylesKey
 import org.b3.agrios.ui.view.View
 
 class PullDownWidgetView<T>(
@@ -10,6 +11,9 @@ class PullDownWidgetView<T>(
     private val label: (T) -> String,
     private val onSelect: (T) -> Unit,
 ) : View {
+    override val stylesKey: StylesKey
+        get() = TODO("Not yet implemented")
+
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     override fun onRender() {

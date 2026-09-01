@@ -6,6 +6,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import org.b3.agrios.generated.resource.StylesKey
 import org.b3.agrios.ui.container.VerticalListContainerView
 import org.b3.agrios.ui.content.ContentView
 import org.b3.agrios.ui.widget.button.ExecuteButtonWidgetView
@@ -19,6 +20,9 @@ class ColumnContainerView(
     children = listOf(title, contentGroup, button),
     modifier = modifier,
 ) {
+    override val stylesKey: StylesKey
+        get() = TODO("Not yet implemented")
+
     @Composable
     override fun onRender() {
         renderingModifier = modifier
