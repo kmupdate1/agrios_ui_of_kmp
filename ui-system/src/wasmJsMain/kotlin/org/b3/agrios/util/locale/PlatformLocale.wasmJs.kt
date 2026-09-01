@@ -1,25 +1,26 @@
 package org.b3.agrios.util.locale
 
 @OptIn(ExperimentalWasmJsInterop::class)
-private val platformLanguage: String = js("navigator.language")
+private val requestedLocale: String =
+    js("""new URLSearchParams(location.search).get("lang") || """"")
 
-actual fun getLocale(): AgriOsLocale =
-    when (platformLanguage) {
-        "ja-JP" -> AgriOsLocale.JA_JP
+@OptIn(ExperimentalWasmJsInterop::class)
+private val platformLanguage: String =
+    js("navigator.language")
 
-        "zh-CN",
-        "zh-Hans-CN",
-        "zh-Hans" -> AgriOsLocale.ZH_CN
+actual fun getLocale(): AgriOsLocale {
+    val locale = requestedLocale
+        .ifBlank { platformLanguage }
 
-        "zh-TW",
-        "zh-Hant-TW",
-        "zh-Hant" -> AgriOsLocale.ZH_TW
+    return when (locale) {
+        "zh-CN", "zh-Hans", "zh-Hans-CN",
+            -> AgriOsLocale.ZH_CN
 
-        "ko-KR" -> AgriOsLocale.KO_KR
-        "it-IT" -> AgriOsLocale.IT_IT
-        "fr-FR" -> AgriOsLocale.FR_FR
-        "de-DE" -> AgriOsLocale.DE_DE
-        "es-ES" -> AgriOsLocale.ES_ES
+        "zh-TW", "zh-Hant", "zh-Hant-TW",
+            -> AgriOsLocale.ZH_TW
 
-        else -> AgriOsLocale.EN_US
+        else -> AgriOsLocale.entries
+            .firstOrNull { it.language == locale }
+            ?: AgriOsLocale.EN_US
     }
+}

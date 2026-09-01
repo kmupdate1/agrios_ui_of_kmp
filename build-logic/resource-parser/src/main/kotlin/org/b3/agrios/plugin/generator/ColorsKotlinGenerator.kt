@@ -3,35 +3,31 @@ package org.b3.agrios.plugin.generator
 import org.b3.agrios.plugin.res.model.ColorsResource
 
 class ColorsKotlinGenerator {
-    fun generate(resources: List<ColorsResource>): String =
-        buildString {
-            appendLine("package org.b3.agrios.generated.resource\n")
-            appendLine("object Colors {")
+    fun generate(resources: List<ColorsResource>): String = buildString {
+        appendLine("package org.b3.agrios.generated.resource")
+        appendLine()
+        appendLine("object Colors {")
 
-            resources
-                .groupBy { it.type }
-                .forEach { (type, colors) ->
-                    appendLine("    object ${type.toKotlinIdentifier()} {")
+        resources
+            .groupBy { it.theme }
+            .forEach { (theme, properties) ->
+                append(INDENT)
+                appendLine("object ${theme.toKotlinIdentifier()} {")
 
-                    colors.forEach { color ->
-                        val value = color.value
-                            .removePrefix("#")
-                            .let {
-                                if (it.length == 6) {
-                                    "0xFF$it"
-                                } else {
-                                    "0x$it"
-                                }
-                            }
+                properties.forEach { property ->
+                    val value = property.value
+                        .removePrefix("#")
+                        .let { if (it.length == 6) "0xFF$it" else "0x$it" }
 
-                        appendLine(
-                            "        const val ${color.name.toKotlinConstIdentifier()}: Long = $value",
-                        )
-                    }
-
-                    appendLine("    }")
+                    append(INDENT + INDENT)
+                    appendLine("const val ${property.tag.toKotlinConstIdentifier()}: Long = $value")
                 }
+                appendLine("$INDENT}")
+            }
+        appendLine("}")
+    }
 
-            appendLine("}")
-        }
+    private companion object {
+        const val INDENT = "    "
+    }
 }

@@ -2,7 +2,7 @@ package org.b3.agrios.plugin.res.parser.xml
 
 sealed interface XmlNode {
     data class Element(
-        val name: String,
+        val tag: String,
         val attributes: Map<String, String>,
         val children: List<XmlNode>,
     ) : XmlNode

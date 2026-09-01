@@ -14,7 +14,7 @@ class DefaultBytesXmlParser : BytesXmlParser() {
             when (reader.next()) {
                 EventType.START_ELEMENT -> {
                     val element = XmlNode.Element(
-                        name = reader.name.localPart,
+                        tag = reader.name.localPart,
                         attributes = buildMap {
                             repeat(reader.attributeCount) { index ->
                                 put(

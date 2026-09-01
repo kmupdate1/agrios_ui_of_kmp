@@ -4,8 +4,8 @@ internal fun XmlNode.requireElement(name: String): XmlNode.Element {
     val element = this as? XmlNode.Element
         ?: error("Expected <$name />, but found $this")
 
-    require(element.name == name) {
-        "Expected <$name />, but found <${element.name} />"
+    require(element.tag == name) {
+        "Expected <$name />, but found <${element.tag} />"
     }
 
     return element
@@ -14,7 +14,7 @@ internal fun XmlNode.requireElement(name: String): XmlNode.Element {
 internal fun XmlNode.Element.requireAttribute(name: String): String =
     attributes[name] ?: error("Expected <$this /> to have attribute '$name'")
 
-internal fun XmlNode.Element.text(): String =
+internal val XmlNode.Element.text: String get() =
     children
         .filterIsInstance<XmlNode.Value>()
         .joinToString("") { it.value }

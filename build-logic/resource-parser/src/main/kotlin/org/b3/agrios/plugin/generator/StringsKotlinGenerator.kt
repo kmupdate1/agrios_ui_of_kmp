@@ -3,22 +3,21 @@ package org.b3.agrios.plugin.generator
 import org.b3.agrios.plugin.res.model.StringsResource
 
 class StringsKotlinGenerator {
-    fun generate(resources: List<StringsResource>): String =
-        buildString {
-            appendLine("package org.b3.agrios.generated.resource")
-            appendLine()
-            appendLine("import org.b3.agrios.util.locale.Locale")
-            appendLine()
-            appendLine("object Strings {")
+    fun generate(resources: List<StringsResource>): String = buildString {
+        appendLine("package org.b3.agrios.generated.resource")
+        appendLine()
+        appendLine("import org.b3.agrios.util.locale.Locale")
+        appendLine()
+        appendLine("object Strings {")
 
-            generateTypes(
-                resources = resources,
-                path = emptyList(),
-                indent = 1,
-            )
+        generateTypes(
+            resources = resources,
+            path = emptyList(),
+            indent = 1,
+        )
 
-            appendLine("}")
-        }
+        appendLine("}")
+    }
 
     private fun StringBuilder.generateTypes(
         resources: List<StringsResource>,
@@ -42,7 +41,7 @@ class StringsKotlinGenerator {
                 .filter { it.path == currentPath }
 
             values
-                .groupBy { it.name }
+                .groupBy { it.tag }
                 .forEach { (name, localized) ->
                     generateString(
                         name = name,

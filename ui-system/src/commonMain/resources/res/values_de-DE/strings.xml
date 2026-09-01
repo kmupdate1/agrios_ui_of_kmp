@@ -1,5 +1,5 @@
 <?xml version="1.1" encoding="UTF-8"?>
-<resources>
+<strings>
     <type name="side_nav">
         <string name="dashboard">Dashboard</string>
         <string name="farm_map">Feldkarte</string>
@@ -31,4 +31,4 @@
         <string name="toggle_enabled">Aktiviert</string>
         <string name="toggle_disabled">Deaktiviert</string>
     </type>
-</resources>
+</strings>

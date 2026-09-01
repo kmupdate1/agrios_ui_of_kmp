@@ -18,7 +18,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import org.b3.agrios.generated.resource.Colors
 import org.b3.agrios.generated.resource.Strings
 import org.b3.agrios.model.*
 import org.b3.agrios.ui.dashboard.DashboardController
@@ -191,7 +190,7 @@ private fun DashboardSidebar(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Box(
-                Modifier.size(34.dp).background(palette.accent, MaterialTheme.shapes.small),
+                Modifier.size(34.dp).background(MaterialTheme.colorScheme.primary, MaterialTheme.shapes.small),
                 contentAlignment = Alignment.Center,
             ) {
                 Icon(Icons.Default.EnergySavingsLeaf, null, tint = Color.White)
@@ -587,7 +586,7 @@ private fun MoistureTrendCard(
     moistureHistory: List<Int>,
     modifier: Modifier,
 ) {
-    Card(modifier, colors = CardDefaults.cardColors(containerColor = palette.surface),
+    Card(modifier, colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         shape = MaterialTheme.shapes.medium, elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)) {
         Column(Modifier.padding(16.dp)) {
             Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {

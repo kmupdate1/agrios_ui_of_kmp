@@ -16,7 +16,7 @@ class StringsResourceParser(
         val xml = parser.parse(input = input)
 
         val resources = xml.root
-            .requireElement("resources")
+            .requireElement("strings")
 
         return resources.children
             .map { it.requireElement("type") }
@@ -38,13 +38,13 @@ class StringsResourceParser(
 
         return type.children.flatMap { child ->
             when (child) {
-                is XmlNode.Element -> when (child.name) {
+                is XmlNode.Element -> when (child.tag) {
                     "string" -> listOf(
                         StringsResource(
                             locale = locale,
                             path = currentPath,
-                            name = child.requireAttribute("name"),
-                            value = child.text(),
+                            tag = child.requireAttribute("name"),
+                            value = child.text,
                         )
                     )
 
@@ -54,7 +54,7 @@ class StringsResourceParser(
                         locale = locale,
                     )
 
-                    else -> error("Unsupported element '${child.name}' in <type>")
+                    else -> error("Unsupported element '${child.tag}' in <type>")
                 }
 
                 is XmlNode.Value -> emptyList()

@@ -1,100 +1,100 @@
 <?xml version="1.1" encoding="UTF-8"?>
-<resources>
-    <type name="light">
+<colors>
+    <theme name="light">
         <!-- Primary -->
-        <color name="primary">#2EAD58</color>
-        <color name="onPrimary">#FFFFFF</color>
-        <color name="primaryContainer">#D6F5DF</color>
-        <color name="onPrimaryContainer">#0B3B1A</color>
+        <primary>#2EAD58</primary>
+        <onPrimary>#FFFFFF</onPrimary>
+        <primaryContainer>#D6F5DF</primaryContainer>
+        <onPrimaryContainer>#0B3B1A</onPrimaryContainer>
 
         <!-- Secondary -->
-        <color name="secondary">#4F8A63</color>
-        <color name="onSecondary">#FFFFFF</color>
-        <color name="secondaryContainer">#D2EBD8</color>
-        <color name="onSecondaryContainer">#123B1D</color>
+        <secondary>#4F8A63</secondary>
+        <onSecondary>#FFFFFF</onSecondary>
+        <secondaryContainer>#D2EBD8</secondaryContainer>
+        <onSecondaryContainer>#123B1D</onSecondaryContainer>
 
         <!-- Tertiary -->
-        <color name="tertiary">#5F8F72</color>
-        <color name="onTertiary">#FFFFFF</color>
-        <color name="tertiaryContainer">#D9EBDD</color>
-        <color name="onTertiaryContainer">#183B25</color>
+        <tertiary>#5F8F72</tertiary>
+        <onTertiary>#FFFFFF</onTertiary>
+        <tertiaryContainer>#D9EBDD</tertiaryContainer>
+        <onTertiaryContainer>#183B25</onTertiaryContainer>
 
         <!-- Background -->
-        <color name="background">#F5F7F9</color>
-        <color name="onBackground">#121212</color>
+        <background>#F5F7F9</background>
+        <onBackground>#121212</onBackground>
 
         <!-- Surface -->
-        <color name="surface">#FFFFFF</color>
-        <color name="onSurface">#121212</color>
-        <color name="surfaceVariant">#EFF2F4</color>
-        <color name="onSurfaceVariant">#3F474D</color>
+        <surface>#FFFFFF</surface>
+        <onSurface>#121212</onSurface>
+        <surfaceVariant>#EFF2F4</surfaceVariant>
+        <onSurfaceVariant>#3F474D</onSurfaceVariant>
 
         <!-- Outline -->
-        <color name="outline">#2EAD58</color>
-        <color name="outlineVariant">#E3E7EA</color>
+        <outline>#2EAD58</outline>
+        <outlineVariant>#E3E7EA</outlineVariant>
 
         <!-- Error -->
-        <color name="error">#BA1A1A</color>
-        <color name="onError">#FFFFFF</color>
-        <color name="errorContainer">#FFDAD6</color>
-        <color name="onErrorContainer">#410002</color>
+        <error>#BA1A1A</error>
+        <onError>#FFFFFF</onError>
+        <errorContainer>#FFDAD6</errorContainer>
+        <onErrorContainer>#410002</onErrorContainer>
 
         <!-- Inverse -->
-        <color name="inverseSurface">#2F3133</color>
-        <color name="inverseOnSurface">#F1F1F1</color>
-        <color name="inversePrimary">#72D98C</color>
+        <inverseSurface>#2F3133</inverseSurface>
+        <inverseOnSurface>#F1F1F1</inverseOnSurface>
+        <inversePrimary>#72D98C</inversePrimary>
 
         <!-- Utility -->
-        <color name="scrim">#52000000</color>
-        <color name="surfaceTint">#2EAD58</color>
-    </type>
+        <scrim>#52000000</scrim>
+        <surfaceTint>#2EAD58</surfaceTint>
+    </theme>
 
-    <type name="dark">
+    <theme name="dark">
         <!-- Primary -->
-        <color name="primary">#72D98C</color>
-        <color name="onPrimary">#003914</color>
-        <color name="primaryContainer">#075322</color>
-        <color name="onPrimaryContainer">#B8F3C6</color>
+        <primary>#72D98C</primary>
+        <onPrimary>#003914</onPrimary>
+        <primaryContainer>#075322</primaryContainer>
+        <onPrimaryContainer>#B8F3C6</onPrimaryContainer>
 
         <!-- Secondary -->
-        <color name="secondary">#9AC9A7</color>
-        <color name="onSecondary">#123B1D</color>
-        <color name="secondaryContainer">#315F3D</color>
-        <color name="onSecondaryContainer">#B6E5C0</color>
+        <secondary>#9AC9A7</secondary>
+        <onSecondary>#123B1D</onSecondary>
+        <secondaryContainer>#315F3D</secondaryContainer>
+        <onSecondaryContainer>#B6E5C0</onSecondaryContainer>
 
         <!-- Tertiary -->
-        <color name="tertiary">#A4CBAF</color>
-        <color name="onTertiary">#183B25</color>
-        <color name="tertiaryContainer">#3A6246</color>
-        <color name="onTertiaryContainer">#C0E7C8</color>
+        <tertiary>#A4CBAF</tertiary>
+        <onTertiary>#183B25</onTertiary>
+        <tertiaryContainer>#3A6246</tertiaryContainer>
+        <onTertiaryContainer>#C0E7C8</onTertiaryContainer>
 
         <!-- Background -->
-        <color name="background">#121212</color>
-        <color name="onBackground">#F5F5F5</color>
+        <background>#121212</background>
+        <onBackground>#F5F5F5</onBackground>
 
         <!-- Surface -->
-        <color name="surface">#0F0F0F</color>
-        <color name="onSurface">#F5F5F5</color>
-        <color name="surfaceVariant">#2A2D2F</color>
-        <color name="onSurfaceVariant">#D0D5D8</color>
+        <surface>#0F0F0F</surface>
+        <onSurface>#F5F5F5</onSurface>
+        <surfaceVariant>#2A2D2F</surfaceVariant>
+        <onSurfaceVariant>#D0D5D8</onSurfaceVariant>
 
         <!-- Outline -->
-        <color name="outline">#72D98C</color>
-        <color name="outlineVariant">#454A4F</color>
+        <outline>#72D98C</outline>
+        <outlineVariant>#454A4F</outlineVariant>
 
         <!-- Error -->
-        <color name="error">#FFB4AB</color>
-        <color name="onError">#690005</color>
-        <color name="errorContainer">#93000A</color>
-        <color name="onErrorContainer">#FFDAD6</color>
+        <error>#FFB4AB</error>
+        <onError>#690005</onError>
+        <errorContainer>#93000A</errorContainer>
+        <onErrorContainer>#FFDAD6</onErrorContainer>
 
         <!-- Inverse -->
-        <color name="inverseSurface">#E6E6E6</color>
-        <color name="inverseOnSurface">#2F3133</color>
-        <color name="inversePrimary">#2EAD58</color>
+        <inverseSurface>#E6E6E6</inverseSurface>
+        <inverseOnSurface>#2F3133</inverseOnSurface>
+        <inversePrimary>#2EAD58</inversePrimary>
 
         <!-- Utility -->
-        <color name="scrim">#52000000</color>
-        <color name="surfaceTint">#72D98C</color>
-    </type>
-</resources>
+        <scrim>#52000000</scrim>
+        <surfaceTint>#72D98C</surfaceTint>
+    </theme>
+</colors>

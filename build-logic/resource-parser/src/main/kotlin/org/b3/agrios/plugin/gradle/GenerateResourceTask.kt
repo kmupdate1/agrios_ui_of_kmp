@@ -2,13 +2,16 @@ package org.b3.agrios.plugin.gradle
 
 import org.b3.agrios.plugin.generator.ColorsKotlinGenerator
 import org.b3.agrios.plugin.generator.StringsKotlinGenerator
+import org.b3.agrios.plugin.generator.StylesKotlinGenerator
 import org.b3.agrios.plugin.res.model.ColorsResource
 import org.b3.agrios.plugin.res.model.Resource
 import org.b3.agrios.plugin.res.model.StringsResource
+import org.b3.agrios.plugin.res.model.StylesResource
 import org.b3.agrios.plugin.res.parser.xml.BytesFileXmlParser
 import org.b3.agrios.plugin.res.parser.xml.DefaultBytesXmlParser
 import org.b3.agrios.plugin.res.values.ColorsResourceParser
 import org.b3.agrios.plugin.res.values.StringsResourceParser
+import org.b3.agrios.plugin.res.values.StylesResourceParser
 import org.b3.agrios.plugin.writer.KtFileWriter
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.DirectoryProperty
@@ -44,6 +47,14 @@ abstract class GenerateResourceTask : DefaultTask() {
                 source = ColorsKotlinGenerator().generate(colors),
             )
         }
+
+        val styles = res.filterIsInstance<StylesResource>()
+        if (styles.isNotEmpty()) {
+            writer.write(
+                fileName = "StylesKey",
+                source = StylesKotlinGenerator().generate(styles),
+            )
+        }
     }
 
     private fun loadRes(): List<Resource> =
@@ -55,6 +66,7 @@ abstract class GenerateResourceTask : DefaultTask() {
                 when (file.nameWithoutExtension) {
                     "strings" -> stringsParser.parse(file)
                     "colors" -> colorsParser.parse(file)
+                    "styles" -> stylesParser.parse(file)
                     else -> emptyList()
                 }
             }
@@ -66,6 +78,9 @@ abstract class GenerateResourceTask : DefaultTask() {
         parser = fileParser,
     )
     private val colorsParser = ColorsResourceParser(
+        parser = fileParser,
+    )
+    private val stylesParser = StylesResourceParser(
         parser = fileParser,
     )
 
