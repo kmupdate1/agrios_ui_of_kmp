@@ -1,0 +1,32 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<resources>
+    <type name="side_nav">
+        <string name="dashboard">Dashboard</string>
+        <string name="farm_map">Mappa della fattoria</string>
+        <string name="zone">Area/Zona</string>
+        <string name="sensor">Sensori</string>
+        <string name="irrigation">Irrigazione</string>
+        <string name="control">Controllo dispositivi</string>
+        <string name="alert">Avvisi</string>
+        <string name="ai_report">Report AI</string>
+        <string name="history_graph">Cronologia/Grafico</string>
+        <string name="settings">Impostazioni</string>
+
+        <type name="card">
+            <string name="title">Stato del sistema</string>
+            <string name="gateway">Online</string>
+        </type>
+    </type>
+    <type name="dashboard">
+        <string name="title">Dashboard della fattoria</string>
+        <string name="description">Condizioni odierne della fattoria supportate da sensori e IA.</string>
+        <string name="status">Tutti i sistemi sono operativi</string>
+    </type>
+    <type name="button">
+        <string name="show_details">Mostra dettagli</string>
+        <string name="execute">Esegui</string>
+        <string name="cancel">Annulla</string>
+        <string name="toggle_enabled">Abilitato</string>
+        <string name="toggle_disabled">Disabilitato</string>
+    </type>
+</resources>

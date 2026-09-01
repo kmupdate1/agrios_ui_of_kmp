@@ -25,7 +25,7 @@ class ColorsKotlinGenerator {
                             }
 
                         appendLine(
-                            "        const val ${color.name.toKotlinConstName()}: Long = $value",
+                            "        const val ${color.name.toKotlinConstIdentifier()}: Long = $value",
                         )
                     }
 

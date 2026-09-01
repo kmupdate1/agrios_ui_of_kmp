@@ -1,0 +1,32 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<resources>
+    <type name="side_nav">
+        <string name="dashboard">仪表盘</string>
+        <string name="farm_map">农场地图</string>
+        <string name="zone">区域/分区</string>
+        <string name="sensor">传感器</string>
+        <string name="irrigation">灌溉管理</string>
+        <string name="control">设备控制</string>
+        <string name="alert">警报</string>
+        <string name="ai_report">AI 报告</string>
+        <string name="history_graph">历史记录/图表</string>
+        <string name="settings">设置</string>
+
+        <type name="card">
+            <string name="title">系统状态</string>
+            <string name="gateway">在线</string>
+        </type>
+    </type>
+    <type name="dashboard">
+        <string name="title">农场仪表盘</string>
+        <string name="description">由传感器和 AI 支持的今日农场状况。</string>
+        <string name="status">所有系统正常</string>
+    </type>
+    <type name="button">
+        <string name="show_details">显示详情</string>
+        <string name="execute">执行</string>
+        <string name="cancel">取消</string>
+        <string name="toggle_enabled">已启用</string>
+        <string name="toggle_disabled">已禁用</string>
+    </type>
+</resources>

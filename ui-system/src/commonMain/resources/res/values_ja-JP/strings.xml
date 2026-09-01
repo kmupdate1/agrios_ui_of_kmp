@@ -1,0 +1,33 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<resources>
+    <type name="side_nav">
+        <string name="dashboard">ダッシュボード</string>
+        <string name="farm_map">圃場マップ</string>
+        <string name="zone">エリア/ゾーン</string>
+        <string name="sensor">センサー</string>
+        <string name="irrigation">冠水管理</string>
+        <string name="control">機器制御</string>
+        <string name="alert">アラート</string>
+        <string name="ai_report">AIレポート</string>
+        <string name="history_graph">履歴/グラフ</string>
+        <string name="settings">設定</string>
+
+        <type name="card">
+            <string name="title">システム状況</string>
+            <string name="gateway">オンライン</string>
+        </type>
+    </type>
+    <type name="dashboard">
+        <string name="title">圃場ダッシュボード</string>
+        <string name="description">センサーとAIが支える、今日の圃場コンディション</string>
+        <string name="status">全システム正常</string>
+    </type>
+    <type name="button">
+        <string name="show_details">詳細を表示</string>
+        <string name="execute">実行</string>
+        <string name="cancel">キャンセル</string>
+
+        <string name="toggle_enabled">有効</string>
+        <string name="toggle_disabled">無効</string>
+    </type>
+</resources>

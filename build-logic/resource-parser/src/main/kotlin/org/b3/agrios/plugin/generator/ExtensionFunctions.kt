@@ -15,7 +15,7 @@ internal fun String.toKotlinIdentifier(): String =
             }
         }
 
-internal fun String.toKotlinConstName(): String =
+internal fun String.toKotlinConstIdentifier(): String =
     replace(Regex("([a-z0-9])([A-Z])"), "$1_$2")
         .replace(Regex("[^A-Za-z0-9_]"), "_")
         .replace(Regex("_+"), "_")

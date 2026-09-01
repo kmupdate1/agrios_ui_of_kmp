@@ -18,6 +18,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import org.b3.agrios.generated.resource.Colors
+import org.b3.agrios.generated.resource.Strings
 import org.b3.agrios.model.*
 import org.b3.agrios.ui.dashboard.DashboardController
 import org.b3.agrios.ui.dashboard.DashboardEvent
@@ -165,16 +167,16 @@ private fun DashboardSidebar(
     onItemSelected: (DashboardNavigationItem) -> Unit,
 ) {
     val items = listOf(
-        DashboardNavigationItem.DASHBOARD to (Icons.Default.Analytics to "ダッシュボード"),
-        DashboardNavigationItem.FARM_MAP to (Icons.Default.Map to "圃場マップ"),
-        DashboardNavigationItem.ZONES to (Icons.Default.Tune to "エリア・ゾーン"),
-        DashboardNavigationItem.SENSORS to (Icons.Default.Sensors to "センサー"),
-        DashboardNavigationItem.IRRIGATION to (Icons.Default.WaterDrop to "灌水管理"),
-        DashboardNavigationItem.EQUIPMENT to (Icons.Default.Memory to "機器制御"),
-        DashboardNavigationItem.ALERTS to (Icons.Default.Notifications to "アラート"),
-        DashboardNavigationItem.AI_REPORTS to (Icons.Default.Assessment to "AIレポート"),
-        DashboardNavigationItem.HISTORY to (Icons.Default.ShowChart to "履歴・グラフ"),
-        DashboardNavigationItem.SETTINGS to (Icons.Default.Settings to "設定"),
+        DashboardNavigationItem.DASHBOARD to (Icons.Default.Analytics to Strings.SideNav.Dashboard),
+        DashboardNavigationItem.FARM_MAP to (Icons.Default.Map to Strings.SideNav.FarmMap),
+        DashboardNavigationItem.ZONES to (Icons.Default.Tune to Strings.SideNav.Zone),
+        DashboardNavigationItem.SENSORS to (Icons.Default.Sensors to Strings.SideNav.Sensor),
+        DashboardNavigationItem.IRRIGATION to (Icons.Default.WaterDrop to Strings.SideNav.Irrigation),
+        DashboardNavigationItem.EQUIPMENT to (Icons.Default.Memory to Strings.SideNav.Control),
+        DashboardNavigationItem.ALERTS to (Icons.Default.Notifications to Strings.SideNav.Alert),
+        DashboardNavigationItem.AI_REPORTS to (Icons.Default.Assessment to Strings.SideNav.AiReport),
+        DashboardNavigationItem.HISTORY to (Icons.Default.ShowChart to Strings.SideNav.HistoryGraph),
+        DashboardNavigationItem.SETTINGS to (Icons.Default.Settings to Strings.SideNav.Settings),
     )
 
     Column(
@@ -196,12 +198,12 @@ private fun DashboardSidebar(
             }
             Spacer(Modifier.width(10.dp))
             Column {
-                Text("AgriOS", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 18.sp)
-                Text("SMART FARMING", color = palette.sidebarMuted, fontSize = 9.sp, letterSpacing = 1.sp)
+                Text(Strings.SideNav.TITLE, color = Color.White, fontWeight = FontWeight.Bold, fontSize = 18.sp)
+                Text(Strings.SideNav.SUB_TITLE, color = palette.sidebarMuted, fontSize = 9.sp, letterSpacing = 1.sp)
             }
         }
 
-        Text("OPERATIONS", color = palette.sidebarMuted, fontSize = 10.sp, letterSpacing = 1.3.sp,
+        Text(Strings.SideNav.CONTENT_GROUP_TITLE, color = palette.sidebarMuted, fontSize = 10.sp, letterSpacing = 1.3.sp,
             modifier = Modifier.padding(start = 12.dp, top = 28.dp, bottom = 8.dp))
         items.forEach { (item, iconAndLabel) ->
             val (icon, label) = iconAndLabel
@@ -227,11 +229,11 @@ private fun DashboardSidebar(
         Card(colors = CardDefaults.cardColors(containerColor = palette.sidebarCard),
             shape = MaterialTheme.shapes.medium) {
             Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                Text("SYSTEM STATUS", color = palette.sidebarMuted, fontSize = 10.sp, letterSpacing = 1.sp)
-                StatusLine("ゲートウェイ", "オンライン", palette.success, palette)
-                StatusLine("センサー", "24 / 26", palette.sidebarText, palette)
-                StatusLine("アクチュエータ", "18 / 20", palette.sidebarText, palette)
-                StatusLine("クラウド接続", "良好", palette.success, palette)
+                Text(Strings.SideNav.Card.Title, color = palette.sidebarMuted, fontSize = 10.sp, letterSpacing = 1.sp)
+                StatusLine("gateway", Strings.SideNav.Card.Gateway, palette.success, palette)
+                StatusLine("sensor", Strings.SideNav.Card.SENSOR, palette.sidebarText, palette)
+                StatusLine("actuator", "18 / 20", palette.sidebarText, palette)
+                StatusLine("cloud_condition", "良好", palette.success, palette)
             }
         }
         Text("v0.1.0 • Connected", color = palette.sidebarMuted, fontSize = 10.sp,
@@ -294,15 +296,15 @@ private fun Metric(icon: androidx.compose.ui.graphics.vector.ImageVector, value:
 private fun DashboardTitle(palette: DashboardPalette) {
     Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.Bottom) {
         Column(Modifier.weight(1f)) {
-            Text("圃場ダッシュボード", color = palette.text, fontSize = 25.sp, fontWeight = FontWeight.Bold)
-            Text("センサーとAIが支える、今日の圃場コンディション", color = palette.muted, fontSize = 12.sp,
+            Text(Strings.Dashboard.Title, color = palette.text, fontSize = 25.sp, fontWeight = FontWeight.Bold)
+            Text(Strings.Dashboard.Description, color = palette.muted, fontSize = 12.sp,
                 modifier = Modifier.padding(top = 4.dp))
         }
         Row(Modifier.background(palette.success.copy(alpha = 0.12f), MaterialTheme.shapes.small)
             .padding(horizontal = 10.dp, vertical = 7.dp), verticalAlignment = Alignment.CenterVertically) {
             Box(Modifier.size(7.dp).background(palette.success, MaterialTheme.shapes.small))
             Spacer(Modifier.width(6.dp))
-            Text("全システム正常", color = palette.success, fontSize = 11.sp, fontWeight = FontWeight.SemiBold)
+            Text(Strings.Dashboard.Status, color = palette.success, fontSize = 11.sp, fontWeight = FontWeight.SemiBold)
         }
     }
 }

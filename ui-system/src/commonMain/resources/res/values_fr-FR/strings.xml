@@ -1,0 +1,32 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<resources>
+    <type name="side_nav">
+        <string name="dashboard">Tableau de bord</string>
+        <string name="farm_map">Carte de l’exploitation</string>
+        <string name="zone">Zone/Secteur</string>
+        <string name="sensor">Capteurs</string>
+        <string name="irrigation">Irrigation</string>
+        <string name="control">Contrôle des appareils</string>
+        <string name="alert">Alertes</string>
+        <string name="ai_report">Rapport IA</string>
+        <string name="history_graph">Historique/Graphique</string>
+        <string name="settings">Paramètres</string>
+
+        <type name="card">
+            <string name="title">État du système</string>
+            <string name="gateway">En ligne</string>
+        </type>
+    </type>
+    <type name="dashboard">
+        <string name="title">Tableau de bord de l’exploitation</string>
+        <string name="description">État actuel de l’exploitation, suivi par les capteurs et l’IA.</string>
+        <string name="status">Tous les systèmes fonctionnent normalement</string>
+    </type>
+    <type name="button">
+        <string name="show_details">Afficher les détails</string>
+        <string name="execute">Exécuter</string>
+        <string name="cancel">Annuler</string>
+        <string name="toggle_enabled">Activé</string>
+        <string name="toggle_disabled">Désactivé</string>
+    </type>
+</resources>

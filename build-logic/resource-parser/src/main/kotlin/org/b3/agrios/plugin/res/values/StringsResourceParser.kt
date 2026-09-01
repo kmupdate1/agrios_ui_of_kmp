@@ -3,6 +3,7 @@ package org.b3.agrios.plugin.res.values
 import org.b3.agrios.plugin.res.domain.ResourceParser
 import org.b3.agrios.plugin.res.model.StringsResource
 import org.b3.agrios.plugin.res.parser.xml.BytesFileXmlParser
+import org.b3.agrios.plugin.res.parser.xml.XmlNode
 import org.b3.agrios.plugin.res.parser.xml.requireAttribute
 import org.b3.agrios.plugin.res.parser.xml.requireElement
 import org.b3.agrios.plugin.res.parser.xml.text
@@ -14,25 +15,55 @@ class StringsResourceParser(
     override fun parse(input: File): List<StringsResource> {
         val xml = parser.parse(input = input)
 
-        val resources = xml.root.requireElement("resources")
+        val resources = xml.root
+            .requireElement("resources")
 
         return resources.children
             .map { it.requireElement("type") }
-            .flatMap { type ->
-                type.children
-                    .map { it.requireElement("string") }
-                    .map { string ->
-                        StringsResource(
-                            locale = input.parentFile?.locale,
-                            type = type.requireAttribute("name"),
-                            name = string.requireAttribute("name"),
-                            value = string.text(),
-                        )
-                    }
+            .flatMap {
+                parseType(
+                    type = it,
+                    path = emptyList(),
+                    locale = input.parentFile?.locale,
+                )
             }
     }
 
-    private val File.locale: String? get() =
-        name.takeIf { it != "values" }
-            ?.removePrefix("values-")
+    private fun parseType(
+        type: XmlNode.Element,
+        path: List<String>,
+        locale: String?,
+    ): List<StringsResource> {
+        val currentPath = path + type.requireAttribute("name")
+
+        return type.children.flatMap { child ->
+            when (child) {
+                is XmlNode.Element -> when (child.name) {
+                    "string" -> listOf(
+                        StringsResource(
+                            locale = locale,
+                            path = currentPath,
+                            name = child.requireAttribute("name"),
+                            value = child.text(),
+                        )
+                    )
+
+                    "type" -> parseType(
+                        type = child,
+                        path = currentPath,
+                        locale = locale,
+                    )
+
+                    else -> error("Unsupported element '${child.name}' in <type>")
+                }
+
+                is XmlNode.Value -> emptyList()
+            }
+        }
+    }
+
+    private val File.locale: String?
+        get() = name
+            .takeIf { it != "values" }
+            ?.removePrefix("values_")
 }

@@ -1,0 +1,32 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<resources>
+    <type name="side_nav">
+        <string name="dashboard">대시보드</string>
+        <string name="farm_map">농장 지도</string>
+        <string name="zone">구역/존</string>
+        <string name="sensor">센서</string>
+        <string name="irrigation">관개 관리</string>
+        <string name="control">장치 제어</string>
+        <string name="alert">알림</string>
+        <string name="ai_report">AI 리포트</string>
+        <string name="history_graph">이력/그래프</string>
+        <string name="settings">설정</string>
+
+        <type name="card">
+            <string name="title">시스템 상태</string>
+            <string name="gateway">온라인</string>
+        </type>
+    </type>
+    <type name="dashboard">
+        <string name="title">농장 대시보드</string>
+        <string name="description">센서와 AI가 지원하는 오늘의 농장 상태입니다.</string>
+        <string name="status">모든 시스템 정상</string>
+    </type>
+    <type name="button">
+        <string name="show_details">상세 보기</string>
+        <string name="execute">실행</string>
+        <string name="cancel">취소</string>
+        <string name="toggle_enabled">활성화</string>
+        <string name="toggle_disabled">비활성화</string>
+    </type>
+</resources>

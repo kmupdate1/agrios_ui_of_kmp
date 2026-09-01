@@ -1,0 +1,34 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<resources>
+    <type name="side_nav">
+        <string name="dashboard">儀表板</string>
+        <string name="farm_map">農場地圖</string>
+        <string name="zone">區域/分區</string>
+        <string name="sensor">感測器</string>
+        <string name="irrigation">灌溉管理</string>
+        <string name="control">設備控制</string>
+        <string name="alert">警報</string>
+        <string name="ai_report">AI 報告</string>
+        <string name="history_graph">歷史記錄/圖表</string>
+        <string name="settings">設定</string>
+
+        <type name="card">
+            <string name="title">系統狀態</string>
+            <string name="gateway">在線</string>
+        </type>
+    </type>
+
+    <type name="dashboard">
+        <string name="title">農場儀表板</string>
+        <string name="description">由感測器和 AI 支援的今日農場狀況。</string>
+        <string name="status">所有系統正常</string>
+    </type>
+
+    <type name="button">
+        <string name="show_details">顯示詳細資訊</string>
+        <string name="execute">執行</string>
+        <string name="cancel">取消</string>
+        <string name="toggle_enabled">已啟用</string>
+        <string name="toggle_disabled">已停用</string>
+    </type>
+</resources>

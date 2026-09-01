@@ -1,5 +1,32 @@
 <?xml version="1.1" encoding="UTF-8"?>
 <resources>
+    <type name="side_nav">
+        <string name="title">AgriOS</string>
+        <string name="sub_title">SMART FARMING</string>
+        <string name="content_group_title">OPERATIONS</string>
+
+        <string name="dashboard">Dashboard</string>
+        <string name="farm_map">Farm Map</string>
+        <string name="zone">Area/Zone</string>
+        <string name="sensor">Sensors</string>
+        <string name="irrigation">Irrigation</string>
+        <string name="control">Device Control</string>
+        <string name="alert">Alert</string>
+        <string name="ai_report">AI Reporting</string>
+        <string name="history_graph">History/Graph</string>
+        <string name="settings">Settings</string>
+
+        <type name="card">
+            <string name="title">SYSTEM STATUS</string>
+            <string name="gateway">online</string>
+            <string name="sensor">%d / %d</string>
+        </type>
+    </type>
+    <type name="dashboard">
+        <string name="title">Farm Dashboard</string>
+        <string name="description">Today's farm condition supported by sensors and AI.</string>
+        <string name="status">All system is normal</string>
+    </type>
     <type name="button">
         <string name="show_details">Show Details</string>
         <string name="execute">Execute</string>
