@@ -8,6 +8,7 @@ import org.b3.agrios.ui.capability.Renderable
 import org.b3.agrios.ui.impl.console.AgriOsConsoleThemeContainerView
 import org.b3.agrios.ui.lifecycle.UiLifecycle
 import org.b3.agrios.ui.view.View
+import org.b3.agrios.util.notifyReady
 
 object Application : Lifecycle {
     override fun onCreate() {
@@ -18,7 +19,9 @@ object Application : Lifecycle {
 
     override fun onLoad() { }
 
-    override fun onStart() { }
+    override fun onStart() {
+        uiLifecycle.onStart()
+    }
 
     override fun onStop() {
         uiLifecycle.onStop()
@@ -31,10 +34,7 @@ object Application : Lifecycle {
     @Composable
     override fun Content() {
         onLoad()
-
         uiLifecycle.onPrepare()
-        uiLifecycle.onStart()
-
         onStart()
     }
 
@@ -45,21 +45,20 @@ object Application : Lifecycle {
 
         @Composable
         override fun onPrepare() {
-            view = AgriOsConsoleThemeContainerView(
+            val view: View = AgriOsConsoleThemeContainerView(
                 isDarkTheme = isSystemInDarkTheme(),
                 renderable = renderable,
             )
+
+            view.onRender()
         }
 
-        @Composable
         override fun onStart() {
-            view.onRender()
+            notifyReady()
         }
 
         override fun onStop() { }
 
         override fun onDestroy() { }
-
-        private lateinit var view: View
     }
 }

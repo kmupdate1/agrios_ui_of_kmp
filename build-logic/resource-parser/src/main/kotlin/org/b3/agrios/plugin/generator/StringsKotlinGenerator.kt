@@ -7,7 +7,7 @@ class StringsKotlinGenerator {
         buildString {
             appendLine("package org.b3.agrios.generated.resource")
             appendLine()
-            appendLine("import androidx.compose.ui.text.intl.Locale")
+            appendLine("import org.b3.agrios.util.locale.Locale")
             appendLine()
             appendLine("object Strings {")
 
