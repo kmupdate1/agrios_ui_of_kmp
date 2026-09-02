@@ -1,11 +1,12 @@
 @file:OptIn(ExperimentalWasmDsl::class)
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
     kotlin("multiplatform")
     kotlin("plugin.compose")
     id("org.jetbrains.compose")
-    // id("com.android.kotlin.multiplatform.library")
+    id("com.android.kotlin.multiplatform.library")
 
     id("org.b3.agrios.plugin.resource")
 }
@@ -19,13 +20,20 @@ kotlin {
     iosArm64()
     iosSimulatorArm64()
 
-    /*
-    androidLibrary {
-        namespace = "org.b3.agrios"
-        compileSdk = 36
-        minSdk = 21
+    android {
+        namespace = "org.b3.agrios.ui"
+        compileSdk = 37
+        minSdk = 24
     }
-    */
+
+    targets
+        .withType<KotlinNativeTarget>()
+        .configureEach {
+            binaries.framework {
+                baseName = "AgriOSKit"
+                isStatic = true
+            }
+        }
 
     sourceSets {
         commonMain.dependencies {

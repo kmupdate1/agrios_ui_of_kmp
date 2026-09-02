@@ -22,4 +22,6 @@ include(
 	":application",
 	":ui-system",
 	":http-client",
+
+	":platform:android",
 )
