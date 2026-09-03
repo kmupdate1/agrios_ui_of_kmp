@@ -173,8 +173,8 @@ private fun DashboardSidebar(
         DashboardNavigationItem.IRRIGATION to (Icons.Default.WaterDrop to Strings.SideNav.Irrigation),
         DashboardNavigationItem.EQUIPMENT to (Icons.Default.Memory to Strings.SideNav.Control),
         DashboardNavigationItem.ALERTS to (Icons.Default.Notifications to Strings.SideNav.Alert),
-        DashboardNavigationItem.AI_REPORTS to (Icons.Default.Assessment to Strings.SideNav.AiReport),
-        DashboardNavigationItem.HISTORY to (Icons.Default.ShowChart to Strings.SideNav.HistoryGraph),
+        DashboardNavigationItem.AI_REPORTS to (Icons.Default.Pages to Strings.SideNav.AiReport),
+        DashboardNavigationItem.HISTORY to (Icons.Default.BarChart to Strings.SideNav.HistoryGraph),
         DashboardNavigationItem.SETTINGS to (Icons.Default.Settings to Strings.SideNav.Settings),
     )
 

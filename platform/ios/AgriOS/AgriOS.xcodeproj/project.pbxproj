@@ -7,18 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BE0AF6B2304816B400DC13F6 /* AgriOSKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE0AF6B1304816B400DC13F6 /* AgriOSKit.framework */; };
-		BE0AF6B3304816B400DC13F6 /* AgriOSKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE0AF6B1304816B400DC13F6 /* AgriOSKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BE208DC03048D4F300EB5B15 /* AgriOSKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE208DBF3048D4F300EB5B15 /* AgriOSKit.framework */; };
+		BE208DC13048D4F300EB5B15 /* AgriOSKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE208DBF3048D4F300EB5B15 /* AgriOSKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BE208DC33048D53900EB5B15 /* AgriOSKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE0AF6B1304816B400DC13F6 /* AgriOSKit.framework */; };
+		BE208DC43048D53900EB5B15 /* AgriOSKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE0AF6B1304816B400DC13F6 /* AgriOSKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		BE0AF6B4304816B400DC13F6 /* Embed Frameworks */ = {
+		BE208DC23048D4F300EB5B15 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				BE0AF6B3304816B400DC13F6 /* AgriOSKit.framework in Embed Frameworks */,
+				BE208DC43048D53900EB5B15 /* AgriOSKit.framework in Embed Frameworks */,
+				BE208DC13048D4F300EB5B15 /* AgriOSKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -28,6 +31,7 @@
 /* Begin PBXFileReference section */
 		BE0AF6A230480C4A00DC13F6 /* AgriOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AgriOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE0AF6B1304816B400DC13F6 /* AgriOSKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AgriOSKit.framework; path = "../../../ui-system/build/bin/iosSimulatorArm64/debugFramework/AgriOSKit.framework"; sourceTree = "<group>"; };
+		BE208DBF3048D4F300EB5B15 /* AgriOSKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AgriOSKit.framework; path = "../../../ui-system/build/bin/iosArm64/debugFramework/AgriOSKit.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -43,7 +47,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE0AF6B2304816B400DC13F6 /* AgriOSKit.framework in Frameworks */,
+				BE208DC33048D53900EB5B15 /* AgriOSKit.framework in Frameworks */,
+				BE208DC03048D4F300EB5B15 /* AgriOSKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,6 +75,7 @@
 		BE0AF6B0304816B400DC13F6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BE208DBF3048D4F300EB5B15 /* AgriOSKit.framework */,
 				BE0AF6B1304816B400DC13F6 /* AgriOSKit.framework */,
 			);
 			name = Frameworks;
@@ -85,7 +91,7 @@
 				BE0AF69E30480C4A00DC13F6 /* Sources */,
 				BE0AF69F30480C4A00DC13F6 /* Frameworks */,
 				BE0AF6A030480C4A00DC13F6 /* Resources */,
-				BE0AF6B4304816B400DC13F6 /* Embed Frameworks */,
+				BE208DC23048D4F300EB5B15 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -287,7 +293,7 @@
 				DEVELOPMENT_TEAM = WJBM8P59T2;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../../ui-system/build/bin/iosSimulatorArm64/debugFramework";
-				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "";
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "$(SRCROOT)/../../ui-system/build/bin/iosSimulatorArm64/debugFramework";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -321,6 +327,7 @@
 				DEVELOPMENT_TEAM = WJBM8P59T2;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../../ui-system/build/bin/iosSimulatorArm64/debugFramework";
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "$(SRCROOT)/../../ui-system/build/bin/iosSimulatorArm64/debugFramework";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
