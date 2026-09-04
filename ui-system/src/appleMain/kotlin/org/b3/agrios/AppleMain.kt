@@ -4,7 +4,7 @@ import androidx.compose.ui.window.ComposeUIViewController
 import org.b3.agrios.lifecycle.Lifecycle
 import platform.UIKit.UIViewController
 
-object IosMain : Bootable {
+object AppleMain : Bootable {
     lateinit var viewController: UIViewController
         private set
 

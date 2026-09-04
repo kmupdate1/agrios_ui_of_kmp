@@ -15,7 +15,7 @@ struct AgriOSApp: App {
     
     private let application: Lifecycle = Application.shared
         
-    init() { IosMain.shared.bootstrap() }
+    init() { AppleMain.shared.bootstrap() }
     
     var body: some Scene {
         WindowGroup {

@@ -10,7 +10,7 @@ import AgriOSKit
 
 struct AgriOSViewControllerRepresentable: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> UIViewController {
-        IosMain.shared.viewController
+        AppleMain.shared.viewController
     }
     
     func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
