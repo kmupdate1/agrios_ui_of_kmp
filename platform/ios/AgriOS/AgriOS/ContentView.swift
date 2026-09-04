@@ -6,20 +6,9 @@
 //
 
 import SwiftUI
-import AgriOSKit
 
-struct ContentView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
+struct ContentView: SwiftUI.View {
+    var body: some SwiftUI.View {
+        AgriOSViewControllerRepresentable()
     }
-}
-
-#Preview {
-    ContentView()
 }

@@ -10,7 +10,6 @@
 		BE208DC03048D4F300EB5B15 /* AgriOSKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE208DBF3048D4F300EB5B15 /* AgriOSKit.framework */; };
 		BE208DC13048D4F300EB5B15 /* AgriOSKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE208DBF3048D4F300EB5B15 /* AgriOSKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BE208DC33048D53900EB5B15 /* AgriOSKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE0AF6B1304816B400DC13F6 /* AgriOSKit.framework */; };
-		BE208DC43048D53900EB5B15 /* AgriOSKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE0AF6B1304816B400DC13F6 /* AgriOSKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -20,7 +19,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				BE208DC43048D53900EB5B15 /* AgriOSKit.framework in Embed Frameworks */,
 				BE208DC13048D4F300EB5B15 /* AgriOSKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -34,9 +32,22 @@
 		BE208DBF3048D4F300EB5B15 /* AgriOSKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AgriOSKit.framework; path = "../../../ui-system/build/bin/iosArm64/debugFramework/AgriOSKit.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		BE208DC9304A364F00EB5B15 /* Exceptions for "AgriOS" folder in "AgriOS" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = BE0AF6A130480C4A00DC13F6 /* AgriOS */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		BE0AF6A430480C4A00DC13F6 /* AgriOS */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				BE208DC9304A364F00EB5B15 /* Exceptions for "AgriOS" folder in "AgriOS" target */,
+			);
 			path = AgriOS;
 			sourceTree = "<group>";
 		};
@@ -115,7 +126,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 2630;
-				LastUpgradeCheck = 2630;
+				LastUpgradeCheck = 2660;
 				TargetAttributes = {
 					BE0AF6A130480C4A00DC13F6 = {
 						CreatedOnToolsVersion = 26.3;
@@ -221,6 +232,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -278,6 +290,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -292,9 +305,11 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = WJBM8P59T2;
 				ENABLE_PREVIEWS = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../../ui-system/build/bin/iosSimulatorArm64/debugFramework";
-				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "$(SRCROOT)/../../ui-system/build/bin/iosSimulatorArm64/debugFramework";
+				EXCLUDED_ARCHS = "";
+				"EXCLUDED_ARCHS[sdk=*]" = "";
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../../../ui-system/build/bin/iosArm64/debugFramework";
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = AgriOS/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -326,9 +341,10 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = WJBM8P59T2;
 				ENABLE_PREVIEWS = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../../ui-system/build/bin/iosSimulatorArm64/debugFramework";
-				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "$(SRCROOT)/../../ui-system/build/bin/iosSimulatorArm64/debugFramework";
+				EXCLUDED_ARCHS = "";
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../../../ui-system/build/bin/iosArm64/debugFramework";
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = AgriOS/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
