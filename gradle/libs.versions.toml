@@ -10,6 +10,8 @@ android-kotlin-multiplatform = "9.0.0"
 kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "datetime" }
 kotlinx-browswer = { group = "org.jetbrains.kotlinx", name = "kotlinx-browser", version.ref = "browser" }
 
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "compose" }
+
 maplibre-compose = { group = "org.maplibre.compose", name = "maplibre-compose", version.ref = "maplibre" }
 
 [bundles]

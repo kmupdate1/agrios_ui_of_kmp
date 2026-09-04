@@ -16,6 +16,14 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.activity.compose)
+
     implementation(project(":ui-system"))
     implementation(project(":app-runtime"))
+
+    testImplementation(kotlin("test"))
+}
+
+kotlin {
+    jvmToolchain(24)
 }

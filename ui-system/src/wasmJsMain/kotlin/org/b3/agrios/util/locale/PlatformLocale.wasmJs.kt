@@ -13,4 +13,5 @@ actual fun getLocale(): AgriOsLocale {
         .ifBlank { platformLanguage }
 
     return Locale.resolve(locale)
+        ?: AgriOsLocale.EN
 }

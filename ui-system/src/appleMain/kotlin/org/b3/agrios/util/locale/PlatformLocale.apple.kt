@@ -1,8 +1,13 @@
 package org.b3.agrios.util.locale
 
-import platform.Foundation.NSLocale
-import platform.Foundation.currentLocale
-import platform.Foundation.languageCode
+import platform.Foundation.NSBundle
 
-actual fun getLocale(): AgriOsLocale =
-    Locale.resolve(NSLocale.currentLocale.languageCode)
+actual fun getLocale(): AgriOsLocale {
+    val localization = NSBundle.mainBundle
+        .preferredLocalizations
+        .firstOrNull() as? String
+
+    return localization
+        ?.let { Locale.resolve(it) }
+        ?: AgriOsLocale.EN
+}

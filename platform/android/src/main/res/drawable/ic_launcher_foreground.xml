@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <group android:scaleX="0.6"
+           android:scaleY="0.6"
+           android:translateX="21.6"
+           android:translateY="21.6">
+
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+            <!-- Wheel -->
+            <circle
+                    cx="128"
+                    cy="128"
+                    r="124"
+                    fill="#00333f"/>
+            <rect
+                    width="256"
+                    height="256"
+                    rx="128"
+                    stroke="#00333f"
+                    stroke-width="2"
+                    fill="#FFFFFF"/>
+
+            <!-- B -->
+            <text
+                    x="100"
+                    y="210"
+                    font-family="sans-serif"
+                    font-size="187"
+                    font-weight="900"
+                    fill="#00333f"
+                    text-anchor="middle">
+                B
+            </text>
+
+            <!-- Superscript 3 -->
+            <text
+                    x="190"
+                    y="100"
+                    font-family="sans-serif"
+                    font-size="90"
+                    font-weight="900"
+                    fill="#00333f"
+                    text-anchor="middle">
+                3
+            </text>
+        </svg>
+    </group>
+</vector>
