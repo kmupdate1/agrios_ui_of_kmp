@@ -3,10 +3,14 @@ package org.b3.agrios
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import org.b3.agrios.lifecycle.Lifecycle
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
+        actionBar?.hide()
+
         super.onCreate(savedInstanceState)
         application.onCreate()
         application.onPrepare()

@@ -197,7 +197,10 @@ private fun DashboardSidebar(
             }
             Spacer(Modifier.width(10.dp))
             Column {
-                Text(Strings.SideNav.TITLE, color = Color.White, fontWeight = FontWeight.Bold, fontSize = 18.sp)
+                Row {
+                    Text(Strings.SideNav.TITLE_AGRI, color = Color.White, fontWeight = FontWeight.Bold, fontSize = 18.sp)
+                    Text(Strings.SideNav.TITLE_ONE, color = palette.accent, fontWeight = FontWeight.Bold, fontSize = 18.sp)
+                }
                 Text(Strings.SideNav.SUB_TITLE, color = palette.sidebarMuted, fontSize = 9.sp, letterSpacing = 1.sp)
             }
         }

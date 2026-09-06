@@ -1,7 +1,8 @@
 <?xml version="1.1" encoding="UTF-8"?>
 <strings>
     <type name="side_nav">
-        <string name="title">AgriOS</string>
+        <string name="title_agri">Agri</string>
+        <string name="title_one">ONE</string>
         <string name="sub_title">SMART FARMING</string>
         <string name="content_group_title">OPERATIONS</string>
 

@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "agrios-app-icon.png",
+      "filename" : "agrione.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
@@ -13,7 +13,6 @@
           "value" : "dark"
         }
       ],
-      "filename" : "agrios-app-icon 1.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"

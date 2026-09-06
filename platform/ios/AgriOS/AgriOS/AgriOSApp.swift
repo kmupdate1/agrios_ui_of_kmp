@@ -19,7 +19,8 @@ struct AgriOSApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            AgriOSViewControllerRepresentable()
+                .ignoresSafeArea()
         }
         .onChange(of: scenePhase) { _, phase in
             switch phase {
@@ -32,6 +33,4 @@ struct AgriOSApp: App {
     }
 }
 
-#Preview {
-    ContentView()
-}
+#Preview { AgriOSViewControllerRepresentable() }

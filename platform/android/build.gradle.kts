@@ -1,4 +1,5 @@
 plugins {
+    kotlin("plugin.compose")
     id("com.android.application")
 }
 
@@ -17,6 +18,7 @@ android {
 
 dependencies {
     implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.core.splashscreen)
 
     implementation(project(":ui-system"))
     implementation(project(":app-runtime"))
