@@ -1,0 +1,97 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<resources>
+    <type name="light">
+        <color name="primary">#2EAD58</color>
+        <color name="onPrimary">#FFFFFF</color>
+        <color name="primaryContainer">#D6F5DF</color>
+        <color name="onPrimaryContainer">#0B3B1A</color>
+
+        <!-- Secondary -->
+        <color name="secondary">#4F8A63</color>
+        <color name="onSecondary">#FFFFFF</color>
+        <color name="secondaryContainer">#D2EBD8</color>
+        <color name="onSecondaryContainer">#123B1D</color>
+
+        <!-- Tertiary -->
+        <color name="tertiary">#5F8F72</color>
+        <color name="onTertiary">#FFFFFF</color>
+        <color name="tertiaryContainer">#D9EBDD</color>
+        <color name="onTertiaryContainer">#183B25</color>
+
+        <!-- Background -->
+        <color name="background">#F5F7F9</color>
+        <color name="onBackground">#121212</color>
+
+        <!-- Surface -->
+        <color name="surface">#FFFFFF</color>
+        <color name="onSurface">#121212</color>
+        <color name="surfaceVariant">#EFF2F4</color>
+        <color name="onSurfaceVariant">#4A4F52</color>
+
+        <!-- Outline -->
+        <color name="outline">#D8DEE3</color>
+
+        <!-- Error -->
+        <color name="error">#BA1A1A</color>
+        <color name="onError">#FFFFFF</color>
+        <color name="errorContainer">#FFDAD6</color>
+        <color name="onErrorContainer">#410002</color>
+
+        <!-- Inverse -->
+        <color name="inverseSurface">#2F3133</color>
+        <color name="inverseOnSurface">#F1F1F1</color>
+        <color name="inversePrimary">#72D98C</color>
+
+        <!-- Utility -->
+        <color name="scrim">#52000000</color>
+        <color name="surfaceTint">#2EAD58</color>
+    </type>
+
+    <type name="dark">
+        <!-- Primary -->
+        <color name="primary">#72D98C</color>
+        <color name="onPrimary">#003914</color>
+        <color name="primaryContainer">#075322</color>
+        <color name="onPrimaryContainer">#88F3C6</color>
+
+        <!-- Secondary -->
+        <color name="secondary">#9AC9A7</color>
+        <color name="onSecondary">#123B1D</color>
+        <color name="secondaryContainer">#315F3D</color>
+        <color name="onSecondaryContainer">#B6E5C0</color>
+
+        <!-- Tertiary -->
+        <color name="tertiary">#A4CBAF</color>
+        <color name="onTertiary">#183B25</color>
+        <color name="tertiaryContainer">#3A6246</color>
+        <color name="onTertiaryContainer">#C0E7C8</color>
+
+        <!-- Background -->
+        <color name="background">#121212</color>
+        <color name="onBackground">#F1F1F1</color>
+
+        <!-- Surface -->
+        <color name="surface">#1E1E1E</color>
+        <color name="onSurface">#F1F1F1</color>
+        <color name="surfaceVariant">#2A2D2F</color>
+        <color name="onSurfaceVariant">#C4C7C9</color>
+
+        <!-- Outline -->
+        <color name="outline">#3A3F44</color>
+
+        <!-- Error -->
+        <color name="error">#FFB4AB</color>
+        <color name="onError">#690005</color>
+        <color name="errorContainer">#93000A</color>
+        <color name="onErrorContainer">#FFDAD6</color>
+
+        <!-- Inverse -->
+        <color name="inverseSurface">#E6E6E6</color>
+        <color name="inverseOnSurface">#2F3133</color>
+        <color name="inversePrimary">#2EAD58</color>
+
+        <!-- Utility -->
+        <color name="scrim">#52000000</color>
+        <color name="surfaceTint">#72D98C</color>
+    </type>
+</resources>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriOS</title>
+
+    <style>
+        html, body, #agrios-console-root {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+
+        #agrios-notice {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: rgba(0, 0, 0, 0.45);
+        }
+
+        #agrios-notice-dialog {
+            width: min(480px, calc(100vw - 48px));
+            box-sizing: border-box;
+            padding: 28px;
+
+            background: white;
+            border-radius: 16px;
+
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        #agrios-notice-dialog h2 {
+            margin: 0 0 16px;
+            font-size: 20px;
+        }
+
+        #agrios-notice-dialog p {
+            margin: 0;
+            line-height: 1.7;
+        }
+
+        #agrios-notice-dialog button {
+            display: block;
+            margin: 24px 0 0 auto;
+            padding: 8px 20px;
+        }
+    </style>
+</head>
+
+<body>
+<div id="agrios-console-root"></div>
+
+<div id="agrios-notice">
+    <div
+            id="agrios-notice-dialog"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="agrios-notice-title"
+    >
+        <h2 id="agrios-notice-title">
+            表示についてのお知らせ
+        </h2>
+
+        <p>
+            初回表示時に、一瞬だけ文字が「□」のように
+            表示される場合があります。
+            これはパソコンやブラウザの故障ではありません。
+            アプリが表示に必要なフォントを準備している間に
+            発生する一時的な表示です。
+            少し待つと正常な文字に切り替わります。
+            現在、より自然に表示できるよう改善を進めています。
+        </p>
+
+        <button id="agrios-notice-ok">
+            OK
+        </button>
+    </div>
+</div>
+
+<script>
+    document
+        .getElementById("agrios-notice-ok")
+        .addEventListener("click", () => {
+            document.getElementById("agrios-notice").remove();
+
+            const script = document.createElement("script");
+            script.src = "ui-system.js";
+            document.body.appendChild(script);
+        });
+</script>
+</body>
+</html>

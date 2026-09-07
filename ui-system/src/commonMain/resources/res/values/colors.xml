@@ -1,0 +1,100 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<colors>
+    <theme name="light">
+        <!-- Primary -->
+        <primary>#2EAD58</primary>
+        <onPrimary>#FFFFFF</onPrimary>
+        <primaryContainer>#D6F5DF</primaryContainer>
+        <onPrimaryContainer>#0B3B1A</onPrimaryContainer>
+
+        <!-- Secondary -->
+        <secondary>#4F8A63</secondary>
+        <onSecondary>#FFFFFF</onSecondary>
+        <secondaryContainer>#D2EBD8</secondaryContainer>
+        <onSecondaryContainer>#123B1D</onSecondaryContainer>
+
+        <!-- Tertiary -->
+        <tertiary>#5F8F72</tertiary>
+        <onTertiary>#FFFFFF</onTertiary>
+        <tertiaryContainer>#D9EBDD</tertiaryContainer>
+        <onTertiaryContainer>#183B25</onTertiaryContainer>
+
+        <!-- Background -->
+        <background>#F5F7F9</background>
+        <onBackground>#121212</onBackground>
+
+        <!-- Surface -->
+        <surface>#FFFFFF</surface>
+        <onSurface>#121212</onSurface>
+        <surfaceVariant>#EFF2F4</surfaceVariant>
+        <onSurfaceVariant>#3F474D</onSurfaceVariant>
+
+        <!-- Outline -->
+        <outline>#2EAD58</outline>
+        <outlineVariant>#E3E7EA</outlineVariant>
+
+        <!-- Error -->
+        <error>#BA1A1A</error>
+        <onError>#FFFFFF</onError>
+        <errorContainer>#FFDAD6</errorContainer>
+        <onErrorContainer>#410002</onErrorContainer>
+
+        <!-- Inverse -->
+        <inverseSurface>#2F3133</inverseSurface>
+        <inverseOnSurface>#F1F1F1</inverseOnSurface>
+        <inversePrimary>#72D98C</inversePrimary>
+
+        <!-- Utility -->
+        <scrim>#52000000</scrim>
+        <surfaceTint>#2EAD58</surfaceTint>
+    </theme>
+
+    <theme name="dark">
+        <!-- Primary -->
+        <primary>#72D98C</primary>
+        <onPrimary>#003914</onPrimary>
+        <primaryContainer>#075322</primaryContainer>
+        <onPrimaryContainer>#B8F3C6</onPrimaryContainer>
+
+        <!-- Secondary -->
+        <secondary>#9AC9A7</secondary>
+        <onSecondary>#123B1D</onSecondary>
+        <secondaryContainer>#315F3D</secondaryContainer>
+        <onSecondaryContainer>#B6E5C0</onSecondaryContainer>
+
+        <!-- Tertiary -->
+        <tertiary>#A4CBAF</tertiary>
+        <onTertiary>#183B25</onTertiary>
+        <tertiaryContainer>#3A6246</tertiaryContainer>
+        <onTertiaryContainer>#C0E7C8</onTertiaryContainer>
+
+        <!-- Background -->
+        <background>#121212</background>
+        <onBackground>#F5F5F5</onBackground>
+
+        <!-- Surface -->
+        <surface>#0F0F0F</surface>
+        <onSurface>#F5F5F5</onSurface>
+        <surfaceVariant>#2A2D2F</surfaceVariant>
+        <onSurfaceVariant>#D0D5D8</onSurfaceVariant>
+
+        <!-- Outline -->
+        <outline>#72D98C</outline>
+        <outlineVariant>#454A4F</outlineVariant>
+
+        <!-- Error -->
+        <error>#FFB4AB</error>
+        <onError>#690005</onError>
+        <errorContainer>#93000A</errorContainer>
+        <onErrorContainer>#FFDAD6</onErrorContainer>
+
+        <!-- Inverse -->
+        <inverseSurface>#E6E6E6</inverseSurface>
+        <inverseOnSurface>#2F3133</inverseOnSurface>
+        <inversePrimary>#2EAD58</inversePrimary>
+
+        <!-- Utility -->
+        <scrim>#52000000</scrim>
+        <surfaceTint>#72D98C</surfaceTint>
+    </theme>
+</colors>

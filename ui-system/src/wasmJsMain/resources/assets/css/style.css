@@ -1,0 +1,21 @@
+html, body, #agrios-console-root {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+#agrios-console-root {
+    visibility: hidden;
+}
+
+#agrios-loading {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: white;
+}
