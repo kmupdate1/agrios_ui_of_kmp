@@ -5,4 +5,22 @@
         <height>match_parent</height>
         <background>@color/background</background>
     </style>
+    <style name="theme">
+        <role>theme</role>
+    </style>
+    <style name="consoleContent">
+        <width>match_parent</width>
+        <height>match_parent</height>
+    </style>
+    <style name="dashboardSideNav">
+        <width>232dp</width>
+        <height>match_parent</height>
+    </style>
+    <style name="dashboardHeader">
+        <width>match_parent</width>
+    </style>
+    <style name="dashboardBody">
+        <width>match_parent</width>
+        <height>match_parent</height>
+    </style>
 </styles>

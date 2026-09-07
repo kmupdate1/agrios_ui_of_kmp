@@ -6,7 +6,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -20,52 +19,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.b3.agrios.generated.resource.Strings
 import org.b3.agrios.model.*
-import org.b3.agrios.ui.dashboard.DashboardController
 import org.b3.agrios.ui.dashboard.DashboardEvent
 import org.b3.agrios.ui.dashboard.DashboardNavigationItem
 import org.b3.agrios.ui.dashboard.IrrigationStatus
+import androidx.compose.material3.ColorScheme as MaterialColorScheme
 
 @Composable
-fun DashboardScreen(
-    controller: DashboardController,
-    modifier: Modifier = Modifier,
-) {
-    val state by controller.state
-    val snapshot = state.snapshot
-    val palette = if (state.isDarkMode) DashboardPalette.dark else DashboardPalette.light
-
-    Row(modifier.fillMaxSize().background(palette.background)) {
-        DashboardSidebar(
-            palette = palette,
-            selectedItem = state.selectedNavigation,
-            onItemSelected = { controller.onEvent(DashboardEvent.SelectNavigation(it)) },
-        )
-
-        Column(Modifier.fillMaxSize()) {
-            DashboardHeader(
-                palette = palette,
-                farmName = snapshot.farmName,
-                lastSyncedAt = snapshot.lastSyncedAt,
-                isDarkMode = state.isDarkMode,
-                onToggleTheme = { controller.onEvent(DashboardEvent.ToggleTheme) },
-            )
-
-            DashboardBody(
-                palette = palette,
-                snapshot = snapshot,
-                selectedZone = state.selectedZone,
-                irrigationStatus = state.selectedIrrigationStatus,
-                runningIrrigationZoneId = state.runningIrrigationZoneId,
-                acknowledgedAlertIds = state.acknowledgedAlertIds,
-                onEvent = controller::onEvent,
-            )
-        }
-    }
-}
-
-@Composable
-private fun DashboardBody(
-    palette: DashboardPalette,
+internal fun DashboardBody(
+    palette: MaterialColorScheme,
     snapshot: DashboardSnapshot,
     selectedZone: Zone?,
     irrigationStatus: IrrigationStatus,
@@ -148,7 +109,7 @@ private fun DashboardBody(
 }
 
 @Composable
-private fun EmptyDashboardState(palette: DashboardPalette, message: String) {
+private fun EmptyDashboardState(palette: MaterialColorScheme, message: String) {
     Card(
         Modifier.fillMaxWidth().height(180.dp),
         colors = CardDefaults.cardColors(containerColor = palette.surface),
@@ -160,8 +121,8 @@ private fun EmptyDashboardState(palette: DashboardPalette, message: String) {
 }
 
 @Composable
-private fun DashboardSidebar(
-    palette: DashboardPalette,
+internal fun DashboardSidebar(
+    palette: MaterialColorScheme,
     selectedItem: DashboardNavigationItem,
     onItemSelected: (DashboardNavigationItem) -> Unit,
 ) {
@@ -244,7 +205,7 @@ private fun DashboardSidebar(
 }
 
 @Composable
-private fun StatusLine(label: String, value: String, valueColor: Color, palette: DashboardPalette) {
+private fun StatusLine(label: String, value: String, valueColor: Color, palette: MaterialColorScheme) {
     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
         Text(label, color = palette.sidebarText, fontSize = 10.sp)
         Text(value, color = valueColor, fontSize = 10.sp, fontWeight = FontWeight.SemiBold)
@@ -252,8 +213,8 @@ private fun StatusLine(label: String, value: String, valueColor: Color, palette:
 }
 
 @Composable
-private fun DashboardHeader(
-    palette: DashboardPalette,
+internal fun DashboardHeader(
+    palette: MaterialColorScheme,
     farmName: String,
     lastSyncedAt: String,
     isDarkMode: Boolean,
@@ -283,7 +244,7 @@ private fun DashboardHeader(
 }
 
 @Composable
-private fun Metric(icon: androidx.compose.ui.graphics.vector.ImageVector, value: String, label: String, palette: DashboardPalette) {
+private fun Metric(icon: androidx.compose.ui.graphics.vector.ImageVector, value: String, label: String, palette: MaterialColorScheme) {
     Row(Modifier.padding(horizontal = 10.dp), verticalAlignment = Alignment.CenterVertically) {
         Icon(icon, null, tint = palette.accent, modifier = Modifier.size(16.dp))
         Spacer(Modifier.width(5.dp))
@@ -295,7 +256,7 @@ private fun Metric(icon: androidx.compose.ui.graphics.vector.ImageVector, value:
 }
 
 @Composable
-private fun DashboardTitle(palette: DashboardPalette) {
+private fun DashboardTitle(palette: MaterialColorScheme) {
     Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.Bottom) {
         Column(Modifier.weight(1f)) {
             Text(Strings.Dashboard.Title, color = palette.text, fontSize = 25.sp, fontWeight = FontWeight.Bold)
@@ -313,7 +274,7 @@ private fun DashboardTitle(palette: DashboardPalette) {
 
 @Composable
 private fun FarmOverviewCard(
-    palette: DashboardPalette,
+    palette: MaterialColorScheme,
     farmName: String,
     areaHectares: Double,
     location: String,
@@ -346,7 +307,7 @@ private fun FarmOverviewCard(
 
 @Composable
 private fun FarmMapCanvas(
-    palette: DashboardPalette,
+    palette: MaterialColorScheme,
     zones: List<Zone>,
     selectedZone: Zone,
     onZoneSelected: (Zone) -> Unit,
@@ -375,7 +336,7 @@ private fun FarmMapCanvas(
                     lineTo(p[0] * size.width + 5f, p[3] * size.height - 3f)
                     close()
                 }
-                drawPath(path, zoneColor(zone.status).copy(alpha = .52f), style = Fill)
+                drawPath(path, zoneColor(zone.status, palette).copy(alpha = .52f), style = Fill)
                 drawPath(path, if (zone.id == selectedZone.id) Color.White else Color.White.copy(alpha = .65f),
                     style = Stroke(if (zone.id == selectedZone.id) 3.5f else 1.5f))
             }
@@ -395,26 +356,31 @@ private fun FarmMapCanvas(
 }
 
 @Composable
-private fun ZoneMapChip(zone: Zone, selectedZone: Zone, onZoneSelected: (Zone) -> Unit) {
+private fun ZoneMapChip(
+    zone: Zone,
+    selectedZone: Zone,
+    onZoneSelected: (Zone) -> Unit,
+) {
+    val colors = MaterialTheme.colorScheme
     val selected = zone.id == selectedZone.id
     Column(Modifier.background(Color.White.copy(alpha = if (selected) .97f else .86f), MaterialTheme.shapes.small)
         .clickable { onZoneSelected(zone) }.padding(horizontal = 8.dp, vertical = 5.dp),
         horizontalAlignment = Alignment.CenterHorizontally) {
         Text(zone.id, color = Color(0xFF17252E), fontSize = 10.sp, fontWeight = FontWeight.Bold)
-        Text(zone.delta.toString(), color = zoneColor(zone.status), fontSize = 9.sp)
+        Text(zone.delta.toString(), color = zoneColor(zone.status, colors), fontSize = 9.sp)
     }
 }
 
-private fun zoneColor(status: MoistureStatus): Color = when (status) {
-    MoistureStatus.OPTIMAL -> Color(0xFF42B96A)
-    MoistureStatus.LOW -> Color(0xFFF0C33E)
-    MoistureStatus.DRY -> Color(0xFFE98A35)
-    MoistureStatus.VERY_DRY -> Color(0xFFD94B4B)
+private fun zoneColor(status: MoistureStatus, colors: MaterialColorScheme): Color = when (status) {
+    MoistureStatus.OPTIMAL -> colors.primary
+    MoistureStatus.LOW -> colors.tertiary
+    MoistureStatus.DRY -> colors.secondary
+    MoistureStatus.VERY_DRY -> colors.error
 }
 
 @Composable
 private fun IrrigationCard(
-    palette: DashboardPalette,
+    palette: MaterialColorScheme,
     zone: Zone,
     state: IrrigationStatus,
     runningIrrigationZoneId: String?,
@@ -440,11 +406,11 @@ private fun IrrigationCard(
                 }
                 Text("LIVE", color = palette.success, fontSize = 9.sp, fontWeight = FontWeight.Bold)
             }
-            Divider(color = palette.border)
+            HorizontalDivider(color = palette.border)
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Column(Modifier.weight(1f)) {
                     Text("${zone.id} ゾーン", color = palette.text, fontWeight = FontWeight.Bold, fontSize = 18.sp)
-                    Text(zone.status.label, color = zoneColor(zone.status), fontSize = 11.sp)
+                    Text(zone.status.label, color = zoneColor(zone.status, palette), fontSize = 11.sp)
                 }
                 Text(zone.delta.toString(), color = palette.text, fontSize = 25.sp, fontWeight = FontWeight.Bold)
                 Text(" Δ値", color = palette.muted, fontSize = 10.sp)
@@ -484,7 +450,7 @@ private fun IrrigationCard(
 
 @Composable
 private fun ZoneStatusCard(
-    palette: DashboardPalette,
+    palette: MaterialColorScheme,
     zones: List<Zone>,
     selectedZone: Zone,
     onZoneSelected: (Zone) -> Unit,
@@ -515,7 +481,7 @@ private fun ZoneStatusCard(
                     verticalAlignment = Alignment.CenterVertically) {
                     Text(zone.id, Modifier.weight(.8f), color = palette.text, fontSize = 11.sp, fontWeight = FontWeight.SemiBold)
                     Row(Modifier.weight(1.15f), verticalAlignment = Alignment.CenterVertically) {
-                        Box(Modifier.size(7.dp).background(zoneColor(zone.status), MaterialTheme.shapes.small))
+                        Box(Modifier.size(7.dp).background(zoneColor(zone.status, palette), MaterialTheme.shapes.small))
                         Spacer(Modifier.width(5.dp))
                         Text(zone.status.label, color = palette.muted, fontSize = 10.sp)
                     }
@@ -529,13 +495,13 @@ private fun ZoneStatusCard(
 }
 
 @Composable
-private fun RowScope.TableHeader(text: String, weight: Float, palette: DashboardPalette) {
+private fun RowScope.TableHeader(text: String, weight: Float, palette: MaterialColorScheme) {
     Text(text, Modifier.weight(weight), color = palette.muted, fontSize = 9.sp, letterSpacing = .8.sp)
 }
 
 @Composable
 private fun AlertStatusCard(
-    palette: DashboardPalette,
+    palette: MaterialColorScheme,
     alerts: List<AlertItem>,
     acknowledgedAlertIds: Set<String>,
     onAcknowledge: (String) -> Unit,
@@ -557,7 +523,7 @@ private fun AlertStatusCard(
 }
 
 @Composable
-private fun AlertRow(palette: DashboardPalette, alert: AlertItem, acknowledged: Boolean, onAcknowledge: (String) -> Unit) {
+private fun AlertRow(palette: MaterialColorScheme, alert: AlertItem, acknowledged: Boolean, onAcknowledge: (String) -> Unit) {
     val color = when (alert.severity) {
         Severity.CRITICAL -> palette.danger
         Severity.WARNING -> palette.warning
@@ -584,7 +550,7 @@ private fun AlertRow(palette: DashboardPalette, alert: AlertItem, acknowledged: 
 
 @Composable
 private fun MoistureTrendCard(
-    palette: DashboardPalette,
+    palette: MaterialColorScheme,
     selectedZone: Zone,
     moistureHistory: List<Int>,
     modifier: Modifier,
@@ -608,7 +574,7 @@ private fun MoistureTrendCard(
 }
 
 @Composable
-private fun MoistureChart(palette: DashboardPalette, values: List<Int>, modifier: Modifier) {
+private fun MoistureChart(palette: MaterialColorScheme, values: List<Int>, modifier: Modifier) {
     Canvas(modifier.padding(top = 10.dp)) {
         if (values.isEmpty()) return@Canvas
 
@@ -638,7 +604,7 @@ private fun MoistureChart(palette: DashboardPalette, values: List<Int>, modifier
 }
 
 @Composable
-private fun WeatherCard(weather: List<WeatherDay>, palette: DashboardPalette, modifier: Modifier) {
+private fun WeatherCard(weather: List<WeatherDay>, palette: MaterialColorScheme, modifier: Modifier) {
     Card(modifier, colors = CardDefaults.cardColors(containerColor = palette.surface),
         shape = MaterialTheme.shapes.medium, elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)) {
         Column(Modifier.padding(16.dp)) {
@@ -663,7 +629,7 @@ private fun WeatherCard(weather: List<WeatherDay>, palette: DashboardPalette, mo
 }
 
 @Composable
-private fun WorkLogCard(workLogs: List<WorkLog>, palette: DashboardPalette) {
+private fun WorkLogCard(workLogs: List<WorkLog>, palette: MaterialColorScheme) {
     Card(Modifier.fillMaxWidth(), colors = CardDefaults.cardColors(containerColor = palette.surface),
         shape = MaterialTheme.shapes.medium, elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)) {
         Row(Modifier.fillMaxWidth().padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
@@ -682,40 +648,17 @@ private fun WorkLogCard(workLogs: List<WorkLog>, palette: DashboardPalette) {
     }
 }
 
-private data class DashboardPalette(
-    val background: Color,
-    val surface: Color,
-    val surfaceAlt: Color,
-    val sidebar: Color,
-    val sidebarCard: Color,
-    val sidebarSelected: Color,
-    val sidebarText: Color,
-    val sidebarMuted: Color,
-    val text: Color,
-    val muted: Color,
-    val border: Color,
-    val accent: Color,
-    val success: Color,
-    val warning: Color,
-    val danger: Color,
-    val info: Color,
-) {
-    companion object {
-        val light = DashboardPalette(
-            background = Color(0xFFF4F7F6), surface = Color.White, surfaceAlt = Color(0xFFF2F5F4),
-            sidebar = Color(0xFF102A2C), sidebarCard = Color(0xFF1B393A), sidebarSelected = Color(0xFF285254),
-            sidebarText = Color(0xFFD5E2DF), sidebarMuted = Color(0xFF8FAEAA), text = Color(0xFF1E2B2E),
-            muted = Color(0xFF718083), border = Color(0xFFE1E8E6), accent = Color(0xFF2FAD69),
-            success = Color(0xFF2D9B5C), warning = Color(0xFFE6A620), danger = Color(0xFFD95050),
-            info = Color(0xFF438BD2),
-        )
-        val dark = DashboardPalette(
-            background = Color(0xFF111918), surface = Color(0xFF1A2423), surfaceAlt = Color(0xFF22302E),
-            sidebar = Color(0xFF091716), sidebarCard = Color(0xFF122322), sidebarSelected = Color(0xFF1D4542),
-            sidebarText = Color(0xFFD1DEDA), sidebarMuted = Color(0xFF789792), text = Color(0xFFE7F0ED),
-            muted = Color(0xFF9AAEAA), border = Color(0xFF344441), accent = Color(0xFF59C986),
-            success = Color(0xFF65D391), warning = Color(0xFFF0BA4E), danger = Color(0xFFF07171),
-            info = Color(0xFF76B5EF),
-        )
-    }
-}
+private val MaterialColorScheme.surfaceAlt: Color get() = surfaceVariant
+private val MaterialColorScheme.sidebar: Color get() = inverseSurface
+private val MaterialColorScheme.sidebarCard: Color get() = inverseOnSurface.copy(alpha = .08f)
+private val MaterialColorScheme.sidebarSelected: Color get() = primary.copy(alpha = .28f)
+private val MaterialColorScheme.sidebarText: Color get() = inverseOnSurface
+private val MaterialColorScheme.sidebarMuted: Color get() = inverseOnSurface.copy(alpha = .62f)
+private val MaterialColorScheme.text: Color get() = onSurface
+private val MaterialColorScheme.muted: Color get() = onSurfaceVariant
+private val MaterialColorScheme.border: Color get() = outlineVariant
+private val MaterialColorScheme.accent: Color get() = primary
+private val MaterialColorScheme.success: Color get() = primary
+private val MaterialColorScheme.warning: Color get() = tertiary
+private val MaterialColorScheme.danger: Color get() = error
+private val MaterialColorScheme.info: Color get() = secondary

@@ -1,15 +1,18 @@
 package org.b3.agrios.ui.impl.console
 
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.ui.Modifier
 import org.b3.agrios.generated.resource.StylesKey
-import org.b3.agrios.ui.container.ContainerView
 import org.b3.agrios.ui.container.VerticalListContainerView
+import org.b3.agrios.ui.view.View
 
 class AgriOsConsoleContentContainerView(
-    private val header: ContainerView,
-    private val content: ContainerView,
+    header: View,
+    content: View,
+    modifier: Modifier = Modifier,
 ) : VerticalListContainerView(
-    listOf(header, content),
+    children = listOf(header, content),
+    modifier = modifier.fillMaxSize(),
 ) {
-    override val stylesKey: StylesKey
-        get() = TODO("Not yet implemented")
+    override val stylesKey: StylesKey = StylesKey.ConsoleContent
 }

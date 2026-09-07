@@ -14,5 +14,5 @@ abstract class HorizontalListContainerView(
 ) {
     @Composable
     override fun onRender() =
-        Row(modifier = super.modifier) { super.onRender() }
+        Row(modifier = renderingModifier) { super.onRender() }
 }

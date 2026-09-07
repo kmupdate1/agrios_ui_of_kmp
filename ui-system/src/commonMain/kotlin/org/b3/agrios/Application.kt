@@ -1,13 +1,10 @@
 package org.b3.agrios
 
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import org.b3.agrios.lifecycle.Lifecycle
 import org.b3.agrios.ui.AgriOsConsoleRootComposition
 import org.b3.agrios.ui.capability.Renderable
-import org.b3.agrios.ui.impl.console.AgriOsConsoleThemeContainerView
 import org.b3.agrios.ui.lifecycle.UiLifecycle
-import org.b3.agrios.ui.view.View
 import org.b3.agrios.util.notifyReady
 
 object Application : Lifecycle {
@@ -46,12 +43,7 @@ object Application : Lifecycle {
 
         @Composable
         override fun onPrepare() {
-            val view: View = AgriOsConsoleThemeContainerView(
-                isDarkTheme = isSystemInDarkTheme(),
-                renderable = renderable,
-            )
-
-            view.onRender()
+            renderable.onRender()
         }
 
         override fun onStart() {
